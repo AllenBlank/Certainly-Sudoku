@@ -9,7 +9,11 @@
                 square_class += "thick-right "  if i % 3 == 2 # every third square gets a right border
                 square_class += "thick-bottom " if (i % 27) > 17 # every third row gets a bottom border (this could be smarter)
             %>
-                <div id="<%="square-#{i}" %>" class="<%= "square #{square_class}" %>"><%= i %></div>
+                <div id="<%="square-text square-#{i}" %>" class="<%= "square #{square_class}" %>">
+                    <span class="square-text">
+                        <%= i % 10 %>
+                    </span>
+                </div>
             <% end %>
             
         </div>
