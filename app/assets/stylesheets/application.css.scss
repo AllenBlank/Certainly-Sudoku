@@ -29,24 +29,35 @@
       padding-left: 0px;
       padding-right: 0px;
     }
+    .outermost {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
   }
 }
 
 @media (min-width: $screen-sm-min) {
   body {
     font-size: 16px;
-  }
-}
-@media (min-width: $screen-md-min) {
-  body {
-    font-size: 18px;
     .navbar-brand {
       position: absolute;
       margin-left: auto;
       margin-right: auto;
-      left: 0;
+      left: 0.5em;
       right: 0;
       text-align: center;
+    }
+    .outermost {
+      padding-left: 25%;
+      padding-right: 25%;
+    }
+  }
+}
+@media (min-width: $screen-md-max) {
+  body {
+    .outermost {
+      padding-left: 35%;
+      padding-right: 35%;
     }
   }
 }
@@ -88,13 +99,28 @@ body {
       background: #eee;
     }
   }
-  .puzzle-mockup {
-    height: 20em;
-    width: 20em;
-    background-color: #000;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    margin-left: auto;
-    margin-right: auto;
+}
+
+.outermost { 
+  width: 100%; /* pick whatever width you want */
+  //background: #00F;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 25%;
+  padding-right: 25%;
+  .outer {
+    width: 100%;
+    padding-top: 100%; /* defines aspect ratio */
+    position: relative;
+    //background: #0F0;
+    .inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #333;
+      color: #EEE;
+    }
   }
 }
