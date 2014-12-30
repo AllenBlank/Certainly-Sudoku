@@ -28,10 +28,6 @@
     #main-container {
       padding-left: 0px;
       padding-right: 0px;
-      .content-area {
-        padding-left: 15px;
-        padding-right: 15px;
-      }
     }
   }
 }
@@ -39,33 +35,42 @@
 @media (min-width: $screen-sm-min) {
   body {
     font-size: 16px;
-    .content-area {
-      padding-left: 30px;
-      padding-right: 30px;
-    }
   }
 }
 @media (min-width: $screen-md-min) {
   body {
     font-size: 18px;
-    .content-area {
-      padding-left: 90px;
-      padding-right: 90px;
+    .navbar-brand {
+      position: absolute;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      text-align: center;
     }
   }
 }
 
 // to create the single column effect all of these have to be set to 100%
-html, body, #main-container, .content-area {
+html, body, #main-container {
   height: 100%;
 }
 
 body {
   background: #000;
-  font-family: 'Lato', sans-serif;
+  
+  #main-container {
+    padding: 0px;
+    background-color: #ccc;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0px;
+    width: 100%;
+  }
   
   .navbar {
-    margin-top: 20px;
+    margin: 0px;
     border-radius: 0px;
     background: #eee;
     .navbar-brand {
@@ -73,7 +78,8 @@ body {
       font-weight: bold;
       letter-spacing: -1px;
       //text-transform: uppercase;
-      font-size: 20px;
+      font-size: 30px;
+
     }
     .active2 {
       background: #E2E2E2;
@@ -82,52 +88,13 @@ body {
       background: #eee;
     }
   }
-  
-  .content-area {
-    background: #eee;
-    margin-bottom: -30px;
-    border-radius: 0px;
-    padding-top: 15px;
-    padding-bottom: 30px;
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    
-    p {
-      margin-left: 2em;
-    }
-    
-    .form-control {
-      margin-bottom: 0.5em;
-    }
-    .btn {
-      background-color: #555;
-      border-color: #333;
-    }
-    .mail-body {
-      width: 100%;
-      height: 300px;
-    }
-    a {
-      color: #333;
-      text-decoration: none;
-    }
-    a:hover {
-      color: #999;
-    }
-  }
-  .footer {
-    background: #eee;
-    height: 30px;
-    text-align: right;
-    padding-right: 3em;
-    a {
-      color: #eee;
-      text-decoration: none;
-      margin-right: 2em;
-    }
-    a:hover {
-      color: #333;
-    }
+  .puzzle-mockup {
+    height: 20em;
+    width: 20em;
+    background-color: #000;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
