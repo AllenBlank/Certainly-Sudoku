@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+ 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -29,7 +30,7 @@
       padding-left: 0px;
       padding-right: 0px;
     }
-    .outermost {
+    .puzzle-outermost {
       padding-left: 1em;
       padding-right: 1em;
     }
@@ -47,7 +48,7 @@
       right: 0;
       text-align: center;
     }
-    .outermost {
+    .puzzle-outermost {
       padding-left: 25%;
       padding-right: 25%;
     }
@@ -55,7 +56,7 @@
 }
 @media (min-width: $screen-md-max) {
   body {
-    .outermost {
+    .puzzle-outermost {
       padding-left: 35%;
       padding-right: 35%;
     }
@@ -101,26 +102,3 @@ body {
   }
 }
 
-.outermost { 
-  width: 100%; /* pick whatever width you want */
-  //background: #00F;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  padding-left: 25%;
-  padding-right: 25%;
-  .outer {
-    width: 100%;
-    padding-top: 100%; /* defines aspect ratio */
-    position: relative;
-    //background: #0F0;
-    .inner {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #333;
-      color: #EEE;
-    }
-  }
-}

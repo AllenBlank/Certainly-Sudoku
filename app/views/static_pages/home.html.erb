@@ -1,7 +1,17 @@
-<div class="puzzle-mockup"></div>
-
-<div class="outermost">
-    <div class="outer">
-        <div class="inner">Your content</div>
+<div class="puzzle-outermost">
+    <div class="puzzle-outer">
+        <div class="puzzle-inner">
+            
+            <% 81.times do |i|
+                square_class = ""
+                square_class += "thick-top "    if i / 9 == 0 # the first row gets a top border
+                square_class += "thick-left "   if i % 9 == 0 # the first col gets a left border
+                square_class += "thick-right "  if i % 3 == 2 # every third square gets a right border
+                square_class += "thick-bottom " if (i % 27) > 17 # every third row gets a bottom border (this could be smarter)
+            %>
+                <div id="<%="square-#{i}" %>" class="<%= "square #{square_class}" %>"><%= i %></div>
+            <% end %>
+            
+        </div>
     </div>
 </div>
