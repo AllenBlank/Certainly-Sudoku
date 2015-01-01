@@ -77,7 +77,16 @@
   background-color: #ace;
 }
 .square.highlighted-red.highlighted-blue {
-  background-color: #cbf;
+  background-color: #cbe;
+}
+.square.highlighted-red:hover {
+  background-color: #daa;
+}
+.square.highlighted-blue:hover {
+  background-color: #9bd;
+}
+.square.highlighted-red.highlighted-blue:hover {
+  background-color: #bad;
 }
 
 .control {
