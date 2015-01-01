@@ -80,13 +80,18 @@
   background-image: -o-linear-gradient(top, #eee, #ddd);
   background-image: linear-gradient(to bottom, #eee, #ddd);
 }
+
 .control:hover {
-  background: #ddd;
-  background-image: -webkit-linear-gradient(top, #ddd, #ccc);
-  background-image: -moz-linear-gradient(top, #ddd, #ccc);
-  background-image: -ms-linear-gradient(top, #ddd, #ccc);
-  background-image: -o-linear-gradient(top, #ddd, #ccc);
-  background-image: linear-gradient(to bottom, #ddd, #ccc);
+  background: #bbb;
+  background-image: -webkit-linear-gradient(top, #bbb, #aaa);
+  background-image: -moz-linear-gradient(top, #bbb, #aaa);
+  background-image: -ms-linear-gradient(top, #bbb, #aaa);
+  background-image: -o-linear-gradient(top, #bbb, #aaa);
+  background-image: linear-gradient(to bottom, #bbb, #aaa);
+}
+
+.num-select-text.active {
+  font-weight: bold;
 }
 
 #pencil, #pen {

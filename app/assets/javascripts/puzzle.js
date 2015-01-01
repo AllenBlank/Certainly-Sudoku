@@ -1,5 +1,6 @@
 var mouseDown = false;
-var currentTool = 'none'
+var currentTool = 'none';
+var currentNum  = 'none';
 
 // resize the text when the window is resized, and when the document loads
 
@@ -27,6 +28,13 @@ function handleToolClick ($tool) {
     currentTool = $tool.attr('id');
 }
 
+function handleNumberClick ($num) {
+    $('.num-select-text').removeClass('active');
+    $num.find('.num-select-text').addClass('active');
+    currentNum = $num.attr('id');
+}
+
+
 
 var allBindings = function() { 
     
@@ -47,6 +55,11 @@ var allBindings = function() {
     $( ".tool" ).click(function() {
         var thisTool = $(this);
         handleToolClick(thisTool);
+    });
+    
+    $( ".num-select" ).click(function() {
+        var thisNum = $(this);
+        handleNumberClick(thisNum);
     });
     
     
