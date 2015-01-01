@@ -70,6 +70,15 @@
 .square:hover {
   background-color: #ddd;
 }
+.square.highlighted-red {
+  background-color: #ebb;
+}
+.square.highlighted-blue {
+  background-color: #ace;
+}
+.square.highlighted-red.highlighted-blue {
+  background-color: #cbf;
+}
 
 .control {
   border-radius: 0.5em;
@@ -81,16 +90,14 @@
   background-image: linear-gradient(to bottom, #eee, #ddd);
 }
 
-.control:hover {
+.control:hover, .num-select.active {
   background: #bbb;
   background-image: -webkit-linear-gradient(top, #bbb, #aaa);
   background-image: -moz-linear-gradient(top, #bbb, #aaa);
   background-image: -ms-linear-gradient(top, #bbb, #aaa);
   background-image: -o-linear-gradient(top, #bbb, #aaa);
   background-image: linear-gradient(to bottom, #bbb, #aaa);
-}
-
-.num-select-text.active {
+  
   font-weight: bold;
 }
 
@@ -99,7 +106,7 @@
   width: 33%;
 }
 
-.hi-lighter, .num-select {
+.hi-lighter, .eraser, .num-select {
   height: 48%;
 }
 
@@ -125,16 +132,20 @@
   background-image: image-url("active-pen.png");
 }
 
+.image-eraser {
+  background-image: image-url("inactive-eraser.png");
+}
+
+.image-eraser:hover, .image-eraser.active{
+  background-image: image-url("active-eraser.png");
+}
+
 .image-highlighter {
   background-image: image-url("inactive-highlighter.png");
 }
 
 .image-red-highlighter:hover, .image-red-highlighter.active {
   background-image: image-url("active-red-highlighter.png");
-}
-
-.image-yellow-highlighter:hover, .image-yellow-highlighter.active {
-  background-image: image-url("active-yellow-highlighter.png");
 }
 
 .image-blue-highlighter:hover, .image-blue-highlighter.active {

@@ -12,14 +12,16 @@ var resize = function() {
 };
 
 
-
-
 function handleSquareMouseEnter ($square) {
-    console.log(currentTool);
+    if ( mouseDown && currentTool.indexOf("highlighter") != -1){
+        highlight($square);
+    }
 }
 
 function handleSquareClick ($square) {
-    console.log($square.child.attr("id"));
+    if (currentTool.indexOf("highlighter") != -1) {
+        highlight($square)
+    }
 }
 
 function handleToolClick ($tool) {
@@ -29,9 +31,14 @@ function handleToolClick ($tool) {
 }
 
 function handleNumberClick ($num) {
-    $('.num-select-text').removeClass('active');
-    $num.find('.num-select-text').addClass('active');
+    $('.num-select').removeClass('active');
+    $num.addClass('active');
     currentNum = $num.attr('id');
+}
+
+function highlight($square) {
+    var color = currentTool.replace("-highlighter","");
+    $square.addClass("highlighted-".concat(color));
 }
 
 
@@ -47,7 +54,12 @@ var allBindings = function() {
         handleSquareMouseEnter(thisSquare);
     });
     
-    $( ".square" ).click(function() {
+    // $( ".square" ).click(function() {
+    //     var thisSquare = $(this);
+    //     handleSquareClick(thisSquare);
+    // });
+    
+    $( ".square" ).mousedown(function() {
         var thisSquare = $(this);
         handleSquareClick(thisSquare);
     });
