@@ -1,6 +1,6 @@
-<div class="puzzle-outermost">
-    <div class="puzzle-outer">
-        <div class="puzzle-inner">
+<div class="outer puzzle-outer">
+    <div class="inner puzzle-inner">
+        <div class="puzzle scaled-container">
             
             <% 81.times do |i|
                 square_class = ""
@@ -9,13 +9,45 @@
                 square_class += "thick-right "  if i % 3 == 2 # every third square gets a right border
                 square_class += "thick-bottom " if (i % 27) > 17 # every third row gets a bottom border (this could be smarter)
             %>
-                <div id="<%="square-text square-#{i}" %>" class="<%= "square #{square_class}" %>">
-                    <span class="square-text">
-                        <%= i % 10 %>
-                    </span>
+                <div id="<%="square-#{i}" %>" class="<%= "square #{square_class}" %>">
+                    <span class="square-text"><%= i % 9 + 1 %></span>
                 </div>
             <% end %>
             
+        </div>
+    </div>
+</div>
+
+<div class="outer">
+    <div class="inner controls-inner">
+        <div class="controls scaled-container">
+            
+            <div class="control pen">
+                <div class="image-container image-pen"></div>
+            </div>
+            
+            <div class="control pencil">
+                <div class="image-container image-pencil"></div>
+            </div>
+            
+            <div class="control hi-lighter">
+                <div class="image-container image-highlighter red-highlighter"></div>
+            </div>
+            
+            <div class="control hi-lighter">
+                <div class="image-container image-highlighter blue-highlighter"></div>
+            </div>
+            
+            <div class="control hi-lighter">
+                <div class="image-container image-highlighter yellow-highlighter"></div>
+            </div>
+            
+            <% (1..9).each do |i|%>
+            <div id="num-select-<%= i %>" class="control num-select">
+                <span class="square-text"><%= i  %></span>
+            </div>
+            <% end %>
+
         </div>
     </div>
 </div>
