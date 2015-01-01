@@ -11,7 +11,7 @@ var resize = function() {
     $('.square-text').css('font-size', resize_size * resize_ratio);
 };
 
-
+// action bindings (clicks, mouseovers etc)
 function handleSquareMouseEnter ($square) {
     if ( mouseDown && currentTool.indexOf("highlighter") != -1){
         highlight($square);
@@ -22,11 +22,18 @@ function handleSquareMouseEnter ($square) {
 }
 
 function handleSquareClick ($square) {
+    console.log(currentNum);
     if (currentTool.indexOf("highlighter") != -1) {
         highlight($square);
     } else
     if (currentTool == "eraser") {
         erase($square);
+    } else
+    if (currentTool == "pen") {
+        writePen($square);
+    } else
+    if (currentTool == "pencil") {
+        writePencil($square);
     }
 }
 
@@ -39,9 +46,11 @@ function handleToolClick ($tool) {
 function handleNumberClick ($num) {
     $('.num-select').removeClass('active');
     $num.addClass('active');
-    currentNum = $num.attr('id');
+    currentNum = $num.attr('id').replace("num-select-","");
 }
 
+
+// tool actions
 function highlight($square) {
     var color = currentTool.replace("-highlighter","");
     $square.addClass("highlighted highlighted-".concat(color));
@@ -51,10 +60,23 @@ function erase($square, option){
     if ( $square.hasClass("highlighted") ) {
         $square.removeClass("highlighted highlighted-red highlighted-blue");
     } else
-    if (option == "onlyHighlight") { return; }
+    if (option == "onlyHighlight") { return; } else
+    if ($square.hasClass("permanent") === false) {
+        $square.removeClass("penned");
+        $square.find('.square-text').text("");
+    }
 }
 
+function writePen($square) {
+    if ($square.hasClass("permanent") === false && currentNum !== 'none') {
+        $square.addClass("penned");
+        $square.find('.square-text').text(currentNum);
+    }
+}
 
+function writePencil ($square) {
+    
+}
 
 var allBindings = function() { 
     
