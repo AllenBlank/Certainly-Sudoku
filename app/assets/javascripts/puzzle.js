@@ -1,3 +1,8 @@
+var mouseDown = false;
+var currentTool = 'none'
+
+// resize the text when the window is resized, and when the document loads
+
 var resize_ratio = 0.75;
 
 var resize = function() {
@@ -5,6 +10,51 @@ var resize = function() {
     $('.square-text').css('font-size', resize_size * resize_ratio);
 };
 
-$(window).on('resize orientationchange', resize);
-$(document).ready(resize); // I guess I need two of these because turbolinks?
-$(document).on('page:load', resize);
+
+
+
+function handleSquareMouseEnter ($square) {
+    console.log(currentTool);
+}
+
+function handleSquareClick ($square) {
+    console.log($square.child.attr("id"));
+}
+
+function handleToolClick ($tool) {
+    $('.image-container').removeClass('active');
+    $tool.find('.image-container').addClass('active');
+    currentTool = $tool.attr('id');
+}
+
+
+var allBindings = function() { 
+    
+    //puzzle interaction bindings
+    $(document).mouseup(function(){ mouseDown = false; });
+    $(document).mousedown(function(){ mouseDown = true; });
+    
+    $( ".square" ).mouseenter(function() {
+        var thisSquare = $(this);
+        handleSquareMouseEnter(thisSquare);
+    });
+    
+    $( ".square" ).click(function() {
+        var thisSquare = $(this);
+        handleSquareClick(thisSquare);
+    });
+
+    $( ".tool" ).click(function() {
+        var thisTool = $(this);
+        handleToolClick(thisTool);
+    });
+    
+    
+    // resize bindings
+    resize();
+    $(window).on('resize orientationchange', resize);
+
+};
+
+$(document).ready(allBindings); // I guess I need two of these because turbolinks?
+$(document).on('page:load', allBindings);

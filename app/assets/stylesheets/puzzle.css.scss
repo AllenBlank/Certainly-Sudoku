@@ -45,6 +45,15 @@
   }
 }
 
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .thick-top {
   border-top: 0.3em solid #333;
 }
@@ -80,7 +89,7 @@
   background-image: linear-gradient(to bottom, #ddd, #ccc);
 }
 
-.pencil, .pen {
+#pencil, #pen {
   height: 48%;
   width: 33%;
 }
@@ -99,7 +108,7 @@
   background-image: image-url("inactive-pencil.png");
 }
 
-.image-pencil:hover {
+.image-pencil:hover, .image-pencil.active {
   background-image: image-url("active-pencil.png");
 }
 
@@ -107,7 +116,7 @@
   background-image: image-url("inactive-pen.png");
 }
 
-.image-pen:hover {
+.image-pen:hover, .image-pen.active{
   background-image: image-url("active-pen.png");
 }
 
@@ -115,14 +124,14 @@
   background-image: image-url("inactive-highlighter.png");
 }
 
-.red-highlighter:hover {
+.image-red-highlighter:hover, .image-red-highlighter.active {
   background-image: image-url("active-red-highlighter.png");
 }
 
-.yellow-highlighter:hover {
+.image-yellow-highlighter:hover, .image-yellow-highlighter.active {
   background-image: image-url("active-yellow-highlighter.png");
 }
 
-.blue-highlighter:hover {
+.image-blue-highlighter:hover, .image-blue-highlighter.active {
   background-image: image-url("active-blue-highlighter.png");
 }

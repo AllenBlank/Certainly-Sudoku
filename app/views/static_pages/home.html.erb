@@ -1,4 +1,4 @@
-<div class="outer puzzle-outer">
+<div class="outer unselectable puzzle-outer">
     <div class="inner puzzle-inner">
         <div class="puzzle scaled-container">
             
@@ -18,28 +18,28 @@
     </div>
 </div>
 
-<div class="outer">
+<div class="outer unselectable">
     <div class="inner controls-inner">
         <div class="controls scaled-container">
             
-            <div class="control pen">
+            <div id="pen" class="control tool">
                 <div class="image-container image-pen"></div>
             </div>
             
-            <div class="control pencil">
+            <div id="pencil" class="control tool">
                 <div class="image-container image-pencil"></div>
             </div>
             
-            <div class="control hi-lighter">
-                <div class="image-container image-highlighter red-highlighter"></div>
+            <div id="red-highlighter" class="control tool hi-lighter">
+                <div class="image-container image-highlighter image-red-highlighter"></div>
             </div>
             
-            <div class="control hi-lighter">
-                <div class="image-container image-highlighter blue-highlighter"></div>
+            <div id="blue-highlighter"  class="control tool hi-lighter">
+                <div class="image-container image-highlighter image-blue-highlighter"></div>
             </div>
             
-            <div class="control hi-lighter">
-                <div class="image-container image-highlighter yellow-highlighter"></div>
+            <div id="yellow-highlighter"  class="control tool hi-lighter">
+                <div class="image-container image-highlighter image-yellow-highlighter"></div>
             </div>
             
             <% (1..9).each do |i|%>
