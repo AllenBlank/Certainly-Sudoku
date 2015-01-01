@@ -1,0 +1,128 @@
+
+.outer { 
+  width: 100%;
+  margin: 0;
+  padding-left: 25%;
+  padding-right: 25%;
+  .puzzle-inner {
+    padding-top: 100%; // defines aspect ratio
+  }
+  .controls-inner {
+    padding-top: 22%; // defines aspect ratio
+  }
+  .inner {
+    width: 100%;
+    position: relative;
+    .scaled-container {
+      position: absolute; // this, with the padding is where the magic is.
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      
+    }
+  }
+}
+
+.puzzle-outer {
+  margin-top: 1em;
+}
+
+
+.square, .control {
+  padding: 0px;
+  height: 11%;
+  width: 11%;
+  color: #333;
+  background-color: #eee;
+  border: 0.1em solid #333;
+  float: left;
+  text-align: center;
+  cursor: default;
+  .square-text {
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+.thick-top {
+  border-top: 0.3em solid #333;
+}
+.thick-bottom {
+  border-bottom: 0.3em solid #333;
+}
+.thick-left {
+  border-left: 0.3em solid #333;
+}
+.thick-right {
+  border-right: 0.3em solid #333;
+}
+
+.square:hover {
+  background-color: #ddd;
+}
+
+.control {
+  border-radius: 0.5em;
+  background: #eee;
+  background-image: -webkit-linear-gradient(top, #eee, #ddd);
+  background-image: -moz-linear-gradient(top, #eee, #ddd);
+  background-image: -ms-linear-gradient(top, #eee, #ddd);
+  background-image: -o-linear-gradient(top, #eee, #ddd);
+  background-image: linear-gradient(to bottom, #eee, #ddd);
+}
+.control:hover {
+  background: #ddd;
+  background-image: -webkit-linear-gradient(top, #ddd, #ccc);
+  background-image: -moz-linear-gradient(top, #ddd, #ccc);
+  background-image: -ms-linear-gradient(top, #ddd, #ccc);
+  background-image: -o-linear-gradient(top, #ddd, #ccc);
+  background-image: linear-gradient(to bottom, #ddd, #ccc);
+}
+
+.pencil, .pen {
+  height: 48%;
+  width: 33%;
+}
+
+.hi-lighter, .num-select {
+  height: 48%;
+}
+
+.image-container {
+  height: 100%;
+  width: 100%;
+  background-size: 100%;
+}
+
+.image-pencil {
+  background-image: image-url("inactive-pencil.png");
+}
+
+.image-pencil:hover {
+  background-image: image-url("active-pencil.png");
+}
+
+.image-pen {
+  background-image: image-url("inactive-pen.png");
+}
+
+.image-pen:hover {
+  background-image: image-url("active-pen.png");
+}
+
+.image-highlighter {
+  background-image: image-url("inactive-highlighter.png");
+}
+
+.red-highlighter:hover {
+  background-image: image-url("active-red-highlighter.png");
+}
+
+.yellow-highlighter:hover {
+  background-image: image-url("active-yellow-highlighter.png");
+}
+
+.blue-highlighter:hover {
+  background-image: image-url("active-blue-highlighter.png");
+}
