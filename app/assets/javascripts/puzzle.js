@@ -2,28 +2,17 @@ var mouseDown = false;
 var currentTool = 'none';
 var currentNum  = 'none';
 
-// resize the text when the window is resized, and when the document loads
-
-var resize_ratio = 0.75;
-
-var resize = function() {
-    var resize_size = $('.square-text').parent().width();
-    $('.square-text').css('font-size', resize_size * resize_ratio);
-    $('.penciled .square-text').css('font-size', resize_size * resize_ratio * 0.33);
-};
-
 // action bindings (clicks, mouseovers etc)
-function handleSquareMouseEnter ($square) {
+var handleSquareMouseEnter = function ($square) {
     if ( mouseDown && textContains(currentTool, "highlighter")){
         highlight($square);
     } else
     if ( mouseDown && currentTool == "eraser") {
-        erase($square, "onlyHighlight")
+        erase($square, "onlyHighlight");
     }
-}
+};
 
-function handleSquareClick ($square) {
-    console.log(currentNum);
+var handleSquareClick = function($square) {
     if (currentTool.indexOf("highlighter") != -1) {
         highlight($square);
     } else
@@ -36,35 +25,36 @@ function handleSquareClick ($square) {
     if (currentTool == "pencil") {
         writePencil($square);
     }
-}
+};
 
-function handleToolClick ($tool) {
+var handleToolClick = function($tool) {
     $('.image-container').removeClass('active');
     $tool.find('.image-container').addClass('active');
     currentTool = $tool.attr('id');
-}
+};
 
-function handleNumberClick ($num) {
+var handleNumberClick = function($num) {
     $('.num-select').removeClass('active');
     $num.addClass('active');
     currentNum = $num.attr('id').replace("num-select-","");
-}
+};
 
 
 // tool actions
 function highlight($square) {
     var color = currentTool.replace("-highlighter","");
-    $square.addClass("highlighted highlighted-".concat(color));
+    var classes = "highlighted highlighted-".concat(color);
+    $square.addClass(classes);
 }
 
 function erase($square, option){
-    if ( $square.hasClass("highlighted") ) {
+    if ( isHighlighted($square) ) {
         $square.removeClass("highlighted highlighted-red highlighted-blue");
     } else
     if (option == "onlyHighlight") { return; } else
     if (isChangeable($square)) {
         clearTooledClasses($square);
-        $square.find('.square-text').text("");
+        setSquareText($square, "");
     }
 }
 
@@ -89,8 +79,7 @@ function writePencil ($square) {
     }
 }
 
-// Helper methods to make the code more readable
-
+// Helpers
 function isPermanent($square) {
     return $square.hasClass("permanent");
 }
@@ -107,6 +96,10 @@ function isInPencil($square) {
     return $square.hasClass("penciled");
 }
 
+function isHighlighted($square) {
+    return $square.hasClass("highlighted");
+}
+
 function numSelected() {
     return currentNum !== "none";
 }
@@ -121,7 +114,7 @@ function getSquareText($square) {
 }
 function setSquareText($square, textToSet) {
     $square.find('.square-text').text(textToSet);
-    resize();
+    Resizer.resize();
 }
 
 function clearTooledClasses($square) {
@@ -129,45 +122,18 @@ function clearTooledClasses($square) {
     $square.removeClass('penciled');
 }
 
-// The event bindings for the puzzle, clicking, resizing and so forth...
+function setMouseUp(){
+    mouseDown = false;
+}
 
-var allBindings = function() { 
-    
-    //puzzle interaction bindings
-    $(document).mouseup(function(){ mouseDown = false; });
-    $(document).mousedown(function(){ mouseDown = true; });
-    
-    $( ".square" ).mouseenter(function() {
-        var thisSquare = $(this);
-        handleSquareMouseEnter(thisSquare);
-    });
-    
-    // $( ".square" ).click(function() {
-    //     var thisSquare = $(this);
-    //     handleSquareClick(thisSquare);
-    // });
-    
-    $( ".square" ).mousedown(function() {
-        var thisSquare = $(this);
-        handleSquareClick(thisSquare);
-    });
+function setMouseDown(){
+    mouseDown = true;
+}
 
-    $( ".tool" ).mousedown(function() {
-        var thisTool = $(this);
-        handleToolClick(thisTool);
-    });
-    
-    $( ".num-select" ).mousedown(function() {
-        var thisNum = $(this);
-        handleNumberClick(thisNum);
-    });
-    
-    
-    // resize bindings
-    resize();
-    $(window).on('resize orientationchange', resize);
-
-};
-
-$(document).ready(allBindings); // I guess I need two of these because turbolinks?
-$(document).on('page:load', allBindings);
+// The event bindings for the puzzle, clicking, dragging and so forth...
+Binder.addBinding(document, 'mousedown', setMouseDown);
+Binder.addBinding(document, 'mouseup', setMouseUp);
+Binder.addBinding('.square', 'mouseenter', handleSquareMouseEnter);
+Binder.addBinding('.square', 'mousedown', handleSquareClick);
+Binder.addBinding('.tool', 'mousedown', handleToolClick);
+Binder.addBinding('.num-select', 'mousedown', handleNumberClick);
