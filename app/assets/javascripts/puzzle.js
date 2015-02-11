@@ -2,6 +2,47 @@ var mouseDown = false;
 var currentTool = 'none';
 var currentNum  = 'none';
 
+var Puzzle = {
+    
+    currentPuzzle: {},
+    
+    setBoard: function(){
+        var layout = this.currentPuzzle.board.split("");
+        for(var i = 0; i < 81; i++){
+            var value = layout[i];
+            value == "0" ? value = "": value = value;
+            setSquareText( $("#square-" + i), value);
+        }
+    },
+    
+    currentBoard: function() {
+        var board = [];
+        var valid = "123456789";
+        for(var i = 0; i < 81; i++) {
+            var text = getSquareText( $("#square-" + i) );
+            board[i] = text;
+        }
+        for(var i = 0; i < board.length; i++) {
+            if (board[i].length != 1 || valid.indexOf(board[i]) == -1){
+                board[i] = "0";
+            }
+        }
+        return board.join("");
+    },
+    
+    fetchPuzzle: function(id) {
+        $.ajax({
+            type: "GET",
+            url: "/puzzles/" + id,
+            dataType: "json",
+            success: function(data){
+                Puzzle.currentPuzzle = data; 
+                Puzzle.setBoard();
+            }        
+        });
+    }
+};
+
 // handlers (clicks, mouseovers etc)
 var handleSquareMouseEnter = function ($square) {
     if ( mouseDown && textContains(currentTool, "highlighter")){

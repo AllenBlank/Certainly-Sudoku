@@ -65,3 +65,5 @@ $(document).on('page:load ready', function(){
   Binder.bind();
   Resizer.resize();
 });
+
+Puzzle.fetchPuzzle(1);
