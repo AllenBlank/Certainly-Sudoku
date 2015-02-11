@@ -16,6 +16,7 @@ gem 'coffee-rails',            '4.1.0'
 gem 'jquery-rails',            '4.0.0.beta2'
 gem 'turbolinks',              '2.3.0'
 gem 'jbuilder',                '2.2.3'
+gem 'responders',           '~> 2.0'
 
 gem 'sdoc',                    '0.4.0', group: :doc
 
