@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# one:
+#   board: MyString
+#   difficulty: MyString
+#   rating: 1
+
+# two:
+#   board: MyString
+#   difficulty: MyString
+#   rating: 1

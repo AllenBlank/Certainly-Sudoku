@@ -55,6 +55,8 @@ var closedResize = function(){
   Resizer.resize();
 };
 
+
+
 Binder.addBinding(window, 'orientationchange resize', closedResize );
 
 // once the page has loaded, all the non onload bindings are made and the text size

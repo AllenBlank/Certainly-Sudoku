@@ -2,7 +2,7 @@ var mouseDown = false;
 var currentTool = 'none';
 var currentNum  = 'none';
 
-// action bindings (clicks, mouseovers etc)
+// handlers (clicks, mouseovers etc)
 var handleSquareMouseEnter = function ($square) {
     if ( mouseDown && textContains(currentTool, "highlighter")){
         highlight($square);
@@ -79,7 +79,7 @@ function writePencil ($square) {
     }
 }
 
-// Helpers
+// Puzzle helper functions for clearer logic.
 function isPermanent($square) {
     return $square.hasClass("permanent");
 }
