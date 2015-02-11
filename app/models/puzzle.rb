@@ -6,4 +6,16 @@ class Puzzle < ActiveRecord::Base
     presence: true, 
     format: {with: VALID_BOARD_REGEX },
     uniqueness: true
+    
+  # only allows the strings "easy", "middling", and "tough"  
+  VALID_DIFFICULTY_REGEX = /\Aeasy\z|\Amiddling\z|\Atough\z/
+  validates :difficulty,
+    presence: true,
+    format: {with: VALID_DIFFICULTY_REGEX}
+  
+  # only allows a single digit integer 1 through 5
+  VALID_RATING_REGEX = /\A[1-5]\z/
+  validates :rating,
+    presence: true,
+    format: {with: VALID_RATING_REGEX}
 end

@@ -1,6 +1,6 @@
 class PuzzlesController < ApplicationController
   before_action :this_puzzle, only: [:show, :destroy]
-  respond_to :js, only: [:show, :destroy, :create]
+  #respond_to :js, only: [:show, :destroy, :create]
   
   def new
   end
@@ -9,6 +9,7 @@ class PuzzlesController < ApplicationController
   end
   
   def show
+    render json: @puzzle
   end
   
   def destroy
@@ -16,6 +17,7 @@ class PuzzlesController < ApplicationController
   
   def index
     @puzzles = Puzzle.all
+    render json: @puzzles
   end
   
   private

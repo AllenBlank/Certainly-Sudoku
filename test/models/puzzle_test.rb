@@ -5,15 +5,26 @@ class PuzzleTest < ActiveSupport::TestCase
     @puzzle = Puzzle.new(board: "0" * 81, difficulty:"easy", rating: 5)
   end
   
-  test "puzzle should be exactly 81 characters long" do
+  test "puzzle board is formatted correctly" do
     assert @puzzle.valid?
     @puzzle.board = "1" * 80
     assert_not @puzzle.valid?
-  end
-  
-  test "puzzle should be only numbers" do
+    
+    setup
+    
     assert @puzzle.valid?
     @puzzle.board = "a" * 81
+    assert_not @puzzle.valid?
+  end
+  
+  test "puzzle rating and difficulty are formatted correctly" do
+    assert @puzzle.valid?
+    @puzzle.difficulty = "somethingelse"
+    assert_not @puzzle.valid?
+    
+    setup
+    
+    @puzzle.rating = 7
     assert_not @puzzle.valid?
   end
   
