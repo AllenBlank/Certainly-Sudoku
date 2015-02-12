@@ -10,8 +10,13 @@ var Puzzle = {
         var layout = this.currentPuzzle.board.split("");
         for(var i = 0; i < 81; i++){
             var value = layout[i];
-            value == "0" ? value = "": value = value;
-            setSquareText( $("#square-" + i), value);
+            var square = $("#square-" + i);
+            if(value == "0"){
+                setSquareText( square, "");
+            } else {
+                setSquareText( square, value);
+                square.addClass('permanent');
+            }
         }
     },
     
