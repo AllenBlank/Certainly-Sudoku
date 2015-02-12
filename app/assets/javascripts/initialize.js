@@ -66,4 +66,4 @@ $(document).on('page:load ready', function(){
   Resizer.resize();
 });
 
-Puzzle.fetchPuzzle(1);
+//Puzzle.fetchPuzzle(1);
