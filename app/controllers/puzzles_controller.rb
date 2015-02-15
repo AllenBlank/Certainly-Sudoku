@@ -8,8 +8,8 @@ class PuzzlesController < ApplicationController
   
   def create
     @puzzle = Puzzle.new(puzzle_parameters)    # Not the final implementation!
-    if @user.save
-      # Handle a successful save.
+    if @puzzle.save
+      redirect_to @puzzle
     else
       render 'new'
     end

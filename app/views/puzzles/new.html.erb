@@ -1,22 +1,24 @@
 
 <div class="outer">
-  <div class="inner">
-    <center>
+  <div class="inner form-container">
+
     <%= form_for(@puzzle) do |f| %>
       
       <%= render 'shared/error_messages' %>
-    
-      <%= f.label :board, "Board, (an 81 character numeric string with zeroes for blanks)" %></br>
-      <%= f.text_field :board %></br>
+
+      <%= f.label :board, "Board, (an 81 character numeric string with zeroes for blanks)" %>
+      <%= f.text_field :board, class: 'form-control' %>
       
-      <%= f.label :difficulty, "Difficulty, (a string: easy, middling or tough)" %></br>
-      <%= f.text_field :difficulty %></br>
+      <%= f.label :difficulty, "Difficulty, (a string: easy, middling or tough)" %>
+      <%= f.text_field :difficulty, class: 'form-control' %>
             
-      <%= f.label :rating, "Rating, (an integer: 1-5)" %></br>
-      <%= f.text_field :rating %></br>
-      
-      <%= f.submit "Create a new puzzle", class: "btn btn-primary" %>
+      <%= f.label :rating, "Rating, (an integer: 1-5)" %>
+      <%= f.text_field :rating, class: 'form-control'%>
+
+      <center>
+        <%= f.submit "Create a new puzzle", class: "btn btn-primary" %>
+      </center>
     <% end %>
-    </center>
+
   </div>
 </div>

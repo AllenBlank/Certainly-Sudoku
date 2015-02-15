@@ -18,4 +18,15 @@ class Puzzle < ActiveRecord::Base
   validates :rating,
     presence: true,
     format: {with: VALID_RATING_REGEX}
+    
+  after_initialize :set_defaults
+  
+  private
+  
+    def set_defaults
+      if self.new_record?
+        self.rating = 3 
+        self.difficulty = 'middling'
+      end
+    end
 end
