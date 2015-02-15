@@ -3,9 +3,16 @@ class PuzzlesController < ApplicationController
   #respond_to :js, only: [:show, :destroy, :create]
   
   def new
+    @puzzle = Puzzle.new
   end
   
   def create
+    @puzzle = Puzzle.new(puzzle_parameters)    # Not the final implementation!
+    if @user.save
+      # Handle a successful save.
+    else
+      render 'new'
+    end
   end
   
   def show
@@ -22,8 +29,12 @@ class PuzzlesController < ApplicationController
   
   private
   
-  def this_puzzle
-    @puzzle = Puzzle.find(params[:id])
-  end
+    def this_puzzle
+      @puzzle = Puzzle.find(params[:id])
+    end
+    
+    def puzzle_parameters
+      params.require(:puzzle).permit(:board, :difficulty, :rating)
+    end
   
 end
