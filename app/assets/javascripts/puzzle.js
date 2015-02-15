@@ -83,6 +83,9 @@ var handleNumberClick = function($num) {
     $('.num-select').removeClass('active');
     $num.addClass('active');
     currentNum = $num.attr('id').replace("num-select-","");
+    if(textContains(currentTool, "highlighter") ){
+        highlightAllNum();
+    }
 };
 
 
@@ -175,8 +178,26 @@ function setMouseUp(){
 function setMouseDown(){
     mouseDown = true;
 }
+//
+var eraseAllHighlight = function() {
+    $(".square").removeClass("highlighted highlighted-red highlighted-blue");
+};
+
+var highlightAllNum = function() {
+    eraseAllHighlight();
+    for(var i = 0; i < 81; i++){
+      var square = $('#square-' + i);
+      var contents = getSquareText(square);
+      if (textContains(contents,"" + currentNum)){
+        highlight(square);
+      }
+    }  
+};
+
 
 // The event bindings for the puzzle, clicking, dragging and so forth...
+Binder.addBinding('#eraser', 'dblclick', eraseAllHighlight);
+
 Binder.addBinding(document, 'mousedown', setMouseDown);
 Binder.addBinding(document, 'mouseup', setMouseUp);
 Binder.addBinding('.square', 'mouseenter', handleSquareMouseEnter);
