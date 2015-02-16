@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211170015) do
+ActiveRecord::Schema.define(version: 20150216041644) do
 
   create_table "puzzles", force: true do |t|
     t.string   "board"
@@ -22,5 +22,15 @@ ActiveRecord::Schema.define(version: 20150211170015) do
   end
 
   add_index "puzzles", ["board"], name: "index_puzzles_on_board", unique: true
+
+  create_table "users", force: true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
 end
