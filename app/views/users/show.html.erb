@@ -1,0 +1,20 @@
+<div class="outer">
+  <div class="inner form-container">
+
+    <h3><%= @user.name %></h3>
+    <h5><%= link_to "(Delete)", @user, method: "delete" %></h5>
+
+    <p>Verification Provider: <%= @user.provider %></p>
+    <p>ID: <%= @user.id %></p>
+    
+    <ul class="games-played">
+      <% @games.each do |game| %>
+        <li>
+          <p><%= link_to "Played Game ##{game.id}", game %></p>
+        </li>
+      <% end %>
+
+    </ul>
+
+  </div>
+</div>

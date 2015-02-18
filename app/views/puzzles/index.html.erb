@@ -1,0 +1,19 @@
+<div class="outer">
+  <div class="inner form-container">
+
+    <h3>All Puzzles</h3>
+
+    <ul class="puzzless">
+      <% @puzzles.each do |puzzle| %>
+        <li>
+          <p><strong><%= link_to "Puzzle ##{puzzle.id}", puzzle %></strong></p>
+          <p>Board: <%= truncate puzzle.board, length: 15 %></p>
+          <p>Rating: <%= puzzle.rating %></p>
+          <p>Difficulty: <%= puzzle.difficulty %></p>
+          <p><%= link_to "Delete", puzzle, method: "delete" %></p>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+</div>

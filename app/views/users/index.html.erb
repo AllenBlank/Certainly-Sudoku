@@ -1,0 +1,17 @@
+<div class="outer">
+  <div class="inner form-container">
+
+    <h3>All Users</h3>
+
+    <ul class="users">
+      <% @users.each do |user| %>
+        <li>
+          <p><strong><%= link_to user.name, user %></strong></p>
+          <p>Facebook User ID: <%= user.uid %></p>
+          <p>App User ID: <%= user.id %></p>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+</div>

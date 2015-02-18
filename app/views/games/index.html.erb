@@ -1,0 +1,17 @@
+<div class="outer">
+  <div class="inner form-container">
+
+    <h3>All games for <%= @user.name %></h3>
+
+    <ul class="users">
+      <% @games.each do |game| %>
+        <li>
+          <p><strong><%= link_to "Game ID: #{game.id}", game %></strong></p>
+          <p>Game's Puzzle's ID: <%= game.puzzle.id %></p>
+          <p>Game's User's ID: <%= game.user.id %></p>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+</div>

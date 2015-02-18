@@ -1,13 +1,13 @@
 class PuzzlesController < ApplicationController
-  before_action :this_puzzle, only: [:show, :destroy]
   #respond_to :js, only: [:show, :destroy, :create]
+  before_action :check_logged_in, :check_is_admin
   
   def new
     @puzzle = Puzzle.new
   end
   
   def create
-    @puzzle = Puzzle.new(puzzle_parameters)    # Not the final implementation!
+    @puzzle = Puzzle.new(puzzle_parameters)
     if @puzzle.save
       redirect_to @puzzle
     else
@@ -16,22 +16,22 @@ class PuzzlesController < ApplicationController
   end
   
   def show
-    render json: @puzzle
+    @puzzle = Puzzle.find(params[:id])
   end
   
   def destroy
+    @puzzle = Puzzle.find(params[:id])
+    flash[:success] = "Puzzle #{@puzzle.id} deleted"
+    @puzzle.destroy
+    redirect_to puzzles_url
   end
   
   def index
     @puzzles = Puzzle.all
-    render json: @puzzles
+#    render json: @puzzles
   end
   
   private
-  
-    def this_puzzle
-      @puzzle = Puzzle.find(params[:id])
-    end
     
     def puzzle_parameters
       params.require(:puzzle).permit(:board, :difficulty, :rating)

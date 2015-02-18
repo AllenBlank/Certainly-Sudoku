@@ -1,0 +1,21 @@
+<div class="outer">
+  <div class="inner form-container">
+
+    <h3>Puzzle ID: <%= @puzzle.id %></h3>
+    <h5><%= link_to "(Delete)", @puzzle, method: "delete" %></h5>
+
+    <p>Board: <%= truncate @puzzle.board, length: 15 %></p>
+    <p>Rating: <%= @puzzle.rating %></p>
+    <p>Difficulty: <%= @puzzle.difficulty %></p>
+    
+    <ul class="games-played">
+      <% @puzzle.games.each do |game| %>
+        <li>
+          <p><%= link_to "Played in Game ##{game.id}", game %></p>
+        </li>
+      <% end %>
+
+    </ul>
+
+  </div>
+</div>
