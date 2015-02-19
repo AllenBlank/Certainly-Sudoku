@@ -17,9 +17,9 @@
             
             <% if logged_in? %>
             
-              <li><a href="#">Puzzle History</a></li>
-              <li><a href="#">Challenges</a></li>
-              <li><a href="#">Ranking</a></li>
+              <li><%= link_to "New Game (Easy)", "/games?difficulty=easy", method: :post %></li>
+              <li><%= link_to "New Game (Middling)", "/games?difficulty=middling", method: :post %></li>
+              <li><%= link_to "New Game (Tough)", "/games?difficulty=tough", method: :post %></li>
               <li><%= link_to "Sign Out", signout_path %></li>
               
             <% else %>

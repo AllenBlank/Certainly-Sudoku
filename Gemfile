@@ -18,6 +18,7 @@ gem 'turbolinks',              '2.3.0'
 gem 'jbuilder',                '2.2.3'
 gem 'responders',           '~> 2.0'
 gem 'omniauth-facebook',    '~> 2.0'
+gem 'json',                 '~> 1.8.1'
 
 gem 'sdoc',                    '0.4.0', group: :doc
 

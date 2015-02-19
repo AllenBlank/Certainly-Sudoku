@@ -204,3 +204,22 @@ Binder.addBinding('.square', 'mouseenter', handleSquareMouseEnter);
 Binder.addBinding('.square', 'mousedown', handleSquareClick);
 Binder.addBinding('.tool', 'mousedown', handleToolClick);
 Binder.addBinding('.num-select', 'mousedown', handleNumberClick);
+
+
+function sendJSON(url,method,data) {
+    $.ajax({
+        url: url,
+        type: method,
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        //complete: callback
+    });
+}
+
+// to save
+//sendJSON("/games/1","PATCH",thing);
+
+// on the other end
+// <script>
+// var board_state = <%= raw @game.board_state %>;
+// </script>
