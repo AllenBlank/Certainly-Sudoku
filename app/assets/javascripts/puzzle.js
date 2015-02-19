@@ -216,6 +216,30 @@ function sendJSON(url,method,data) {
     });
 }
 
+function generateBoardState () {
+    var boardState = {}
+    
+    for(var i = 0; i < 81; i++){
+        var square = $('#square-' + i);
+        boardState[i] = {
+            classes: square.attr('class'),
+            text: square.find('.square-text').text()
+            
+        }
+    }
+    
+    return boardState;
+}
+
+function loadBoardState (board) {
+    for(var i = 0; i < 81; i++){
+        var square = $('#square-' + i);
+        square.attr('class', board[i].classes );
+        square.find('.square-text').text( board[i].text );
+    }
+    Resizer.resize();
+}
+
 // to save
 //sendJSON("/games/1","PATCH",thing);
 
