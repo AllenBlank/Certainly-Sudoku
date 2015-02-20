@@ -23,46 +23,6 @@
   }
 }
 
-@media (max-width: $screen-xs-max) {
-  body {
-    font-size: 14px;
-    #main-container {
-      padding-left: 0px;
-      padding-right: 0px;
-    }
-    .outer {
-      padding-left: 1em;
-      padding-right: 1em;
-    }
-  }
-}
-
-@media (min-width: $screen-sm-min) {
-  body {
-    font-size: 16px;
-    .navbar-brand {
-      position: absolute;
-      margin-left: auto;
-      margin-right: auto;
-      left: 0.5em;
-      right: 0;
-      text-align: center;
-    }
-    .outer {
-      padding-left: 25%;
-      padding-right: 25%;
-    }
-  }
-}
-@media (min-width: $screen-md-max) {
-  body {
-    .outer {
-      padding-left: 35%;
-      padding-right: 35%;
-    }
-  }
-}
-
 // to create the single column effect all of these have to be set to 100%
 html, body, #main-container {
   height: 100%;
