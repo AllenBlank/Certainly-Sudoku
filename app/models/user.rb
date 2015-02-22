@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  has_many :games
+  has_many :games, dependent: :destroy
   has_many :puzzles, through: :games
   
   def self.from_omniauth(auth)

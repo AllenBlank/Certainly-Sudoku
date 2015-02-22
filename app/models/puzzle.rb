@@ -1,5 +1,5 @@
 class Puzzle < ActiveRecord::Base
-  has_many :games
+  has_many :games, dependent: :destroy
   has_many :users, through: :games
   
   
