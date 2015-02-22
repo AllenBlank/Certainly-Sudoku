@@ -68,6 +68,7 @@ body.controller-games {
       padding-top: 2%;
       height: 100%;
       width: 100%;
+      display: none;
       .pencil-text {
         float: left;
         text-align: center;
@@ -79,14 +80,6 @@ body.controller-games {
   }
   
   // the bit to make showing/ hiding the pencil element easier.
-  .square.pen, .square.permanent {
-    .square-text{
-      display: block;
-    }
-    .pencil-container{
-      display: none;
-    }
-  }
   
   .square.pencil {
     .square-text{

@@ -67,7 +67,7 @@ var Tool = {
       }
     },
     enter: function($square){
-      if( isMouseDown ){
+      if( Mouse.isDown ){
         $square.clearHighlighter();
       }
     },
@@ -80,7 +80,7 @@ var Tool = {
       $square.markWithHighlighter("red");
     },
     enter: function($square){
-      if ( isMouseDown ) {
+      if ( Mouse.isDown ) {
         $square.markWithHighlighter("red");
       }
     },
@@ -90,7 +90,7 @@ var Tool = {
       $square.markWithHighlighter("blue");
     },
     enter: function($square){
-      if ( isMouseDown ) {
+      if ( Mouse.isDown ) {
         $square.markWithHighlighter("blue");
       }
     },
@@ -181,11 +181,70 @@ var NumberPallet = {
   }
 };
 
-//track mousedown
-var isMouseDown = false;
+var BoardState = {
+  
+  current: {},
+  
+  save: function() {
+    var gameID = $('.puzzle').attr('id').replace('game-','');
+    this.generate();
+    this.sendJSON('/games/' + gameID, 'PATCH', this.current);
+  },
 
-$(document).on("mousedown", function(){ isMouseDown = true;});
-$(document).on("mouseup",   function(){ isMouseDown = false;});
+  generate: function() {
+    var data = {};
+    data.boardState = {};
+    
+    for(var i = 0; i < 81; i++){
+        var square = $('#square-' + i);
+        
+        var pencilText = square.find('.pencil-container').text();
+        var pencilMarks = "";
+        
+        var classes = square.attr('class');
+        classes = classes.replace('thick-top', '');
+        classes = classes.replace('thick-left', '');
+        classes = classes.replace('thick-right', '');
+        classes = classes.replace('thick-bottom', '');
+        classes = classes.replace('square', '');
+        
+        for(var j = 1; j < 10; j++){
+          var num = "" + j;
+          if(pencilText.indexOf(num) != -1){
+            pencilMarks += num;
+          }
+        }
+        
+        data.boardState[i] = {
+            classes: classes,
+            text: square.find('.square-text').text(),
+            pencilMarks: pencilMarks
+        };
+    }
+    
+    this.current = data;  
+    return data;
+  },
+
+  sendJSON: function(url,method,data) {
+    $.ajax({
+        url: url,
+        type: method,
+        data: JSON.stringify(data),
+        contentType: "application/json",
+    });
+  }
+
+};
+
+
+//track mousedown
+var Mouse = {
+  isDown: false,
+  
+  onMouseDown: function(){ Mouse.isDown = true;},
+  onMouseUp:   function(){ Mouse.isDown = false;}
+};
 
 // resize the text on a window adjustment
 $(window).on('orientationchange resize', function() {Resizer.resize();} );
@@ -200,6 +259,9 @@ $(document).on('page:load ready', function(){
   $.fn.extend(NumberPallet.helpers);
   $.fn.extend(Square.helpers);
   $.fn.extend(Tool.helpers);
+  
+  $(document).on("mousedown", Mouse.onMouseDown);
+  $(document).on("mouseup",   Mouse.onMouseUp);
   
   $('.square').on("mousedown", Square.onMouseDown);
   $('.square').on("mouseenter", Square.onMouseEnter);

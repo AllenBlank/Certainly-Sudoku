@@ -1,19 +1,28 @@
 <div class="outer unselectable puzzle-outer">
     <div class="inner puzzle-inner">
-        <div class="puzzle scaled-container">
+        <div id="game-<%= @game.id %>" class="puzzle scaled-container">
             
             <% 81.times do |i|
+                
+                square_state = @board_state[i.to_s]
+                
                 square_class = ""
                 square_class += "thick-top "    if i / 9 == 0 # the first row gets a top border
                 square_class += "thick-left "   if i % 9 == 0 # the first col gets a left border
                 square_class += "thick-right "  if i % 3 == 2 # every third square gets a right border
                 square_class += "thick-bottom " if (i % 27) > 17 # every third row gets a bottom border (this could be smarter)
+                square_class += square_state["classes"]
+                
             %>
-                <div id="<%="square-#{i}" %>" class="<%= "square #{square_class} pen" %>">
-                    <span class="square-text"> <%= i % 9 + 1 %></span>
+                <div id="<%="square-#{i}" %>" class="<%= "square #{square_class}" %>">
+                    <span class="square-text"> <%= square_state["text"] %></span>
                     <div class="pencil-container">
-                        <% (1..9).each do |j| %>
-                            <span class="pencil-text pencil-<%= j %>"></span>
+                        <% (1..9).each do |j| 
+                            this_num = j.to_s
+                            insert = j if square_state["pencilMarks"].include? this_num
+                            insert ||= ""
+                        %>
+                            <span class="pencil-text pencil-<%= j %>"><%= insert %></span>
                         <% end %>
                     </div>
                 </div>

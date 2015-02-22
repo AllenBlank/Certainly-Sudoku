@@ -34,13 +34,18 @@ class GamesController < ApplicationController
   
   def show
     @game = Game.find( params[:id])
+    @game.reset_board_state unless @game.board_state.is_json?
+    @board_state = JSON.parse(@game.board_state)  #find this string extension in core_class_extensions.rb in initializers.
   end
   
   def update
     @game = Game.find( params[:id] )
-    @correct_user = @game.user
-    if current_user == @correct_user 
-      @game.update( board_state: params[:board_state].to_json )
+    correct_user = @game.user
+    
+    board_state = params[:boardState].to_json 
+    
+    if (current_user == correct_user) 
+      @game.update( board_state: board_state)
     end
   end
   
