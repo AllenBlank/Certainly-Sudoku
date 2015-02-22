@@ -9,9 +9,13 @@
                 square_class += "thick-right "  if i % 3 == 2 # every third square gets a right border
                 square_class += "thick-bottom " if (i % 27) > 17 # every third row gets a bottom border (this could be smarter)
             %>
-                <div id="<%="square-#{i}" %>" class="<%= "square #{square_class}" %>">
-                    <span class="pen-container"></span>
-                    <div class="pencil-container"></div>
+                <div id="<%="square-#{i}" %>" class="<%= "square #{square_class} pen" %>">
+                    <span class="square-text"> <%= i % 9 + 1 %></span>
+                    <div class="pencil-container">
+                        <% (1..9).each do |j| %>
+                            <span class="pencil-text pencil-<%= j %>"></span>
+                        <% end %>
+                    </div>
                 </div>
             <% end %>
             
@@ -19,11 +23,11 @@
     </div>
 </div>
 
-<div class="outer unselectable">
+<div class="outer controls-outer unselectable">
     <div class="inner controls-inner">
         <div class="controls scaled-container">
             
-            <div id="pen" class="control tool">
+            <div id="pen" class="control tool active">
                 <div class="image-container image-pen"></div>
             </div>
             
@@ -35,11 +39,11 @@
                 <div class="image-container image-eraser"></div>
             </div>
             
-            <div id="red-highlighter" class="control tool hi-lighter">
+            <div id="redHighlighter" class="control tool hi-lighter">
                 <div class="image-container image-highlighter image-red-highlighter"></div>
             </div>
             
-            <div id="blue-highlighter"  class="control tool hi-lighter">
+            <div id="blueHighlighter"  class="control tool hi-lighter">
                 <div class="image-container image-highlighter image-blue-highlighter"></div>
             </div>
             

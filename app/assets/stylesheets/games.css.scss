@@ -2,18 +2,29 @@
 @import "bootstrap";
 
 body.controller-games {
+  
+  
+  
+  // so you dont see the text selection cursor
+  .unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  // the bit that creates the rectangles that scale to the width of the screen
+  // the ones that hold the puzzle and controls
+  
   .outer { 
     width: 100%;
     margin: 0;
     padding-left: 25%;
     padding-right: 25%;
-    .puzzle-inner {
-      padding-top: 100%; // defines aspect ratio
-    }
-    .controls-inner {
-      padding-top: 22%; // defines aspect ratio
-    }
     .inner {
+      padding-top: 100%; // defines aspect ratio
       width: 100%;
       position: relative;
       .scaled-container {
@@ -27,10 +38,13 @@ body.controller-games {
     }
   }
   
+  // the css related to the puzzle, it's squares and each squares contents.
   .puzzle-outer {
     margin-top: 1em;
+    .puzzle-inner {
+      padding-top: 100%; // defines aspect ratio
+    }
   }
-  
   
   .square, .control {
     padding: 0px;
@@ -39,24 +53,54 @@ body.controller-games {
     color: #333;
     background-color: #eee;
     border: 0.1em solid #333;
+    display: block;
     float: left;
     text-align: center;
     cursor: default;
-    .square-text {
+    .square-text, .pencil-container, .pencil-text {
       padding: 0px;
       margin: 0px;
     }
+    .square-text {
+      //display: none;
+    }
+    .pencil-container {
+      padding-top: 2%;
+      height: 100%;
+      width: 100%;
+      .pencil-text {
+        float: left;
+        text-align: center;
+        cursor: default;
+        height: 33%;
+        width: 33%;
+      }
+    }
   }
   
-  .unselectable {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  // the bit to make showing/ hiding the pencil element easier.
+  .square.pen, .square.permanent {
+    .square-text{
+      display: block;
+    }
+    .pencil-container{
+      display: none;
+    }
   }
   
+  .square.pencil {
+    .square-text{
+      display: none;
+    }
+    .pencil-container{
+      display: block;
+    }
+  }
+  .square.bold {
+    font-weight:bold;
+  }
+  
+  // for the creation of the grid effect on the puzzle
   .thick-top {
     border-top: 0.3em solid #333;
   }
@@ -70,132 +114,119 @@ body.controller-games {
     border-right: 0.3em solid #333;
   }
   
+  // for the various spotlighting/highlighting effects
   .square:hover {
     background-color: #ddd;
   }
-  .square.highlighted-red {
+  .square.redHighlighter {
     background-color: #ebb;
   }
-  .square.highlighted-blue {
+  .square.blueHighlighter {
     background-color: #ace;
   }
-  .square.highlighted-red.highlighted-blue {
+  .square.redHighlighter.blueHighlighter {
     background-color: #cbe;
   }
-  .square.highlighted-red:hover {
+  .square.redHighlighter:hover {
     background-color: #daa;
   }
-  .square.highlighted-blue:hover {
+  .square.blueHighlighter:hover {
     background-color: #9bd;
   }
-  .square.highlighted-red.highlighted-blue:hover {
+  .square.redHighlighter.blueHighlighter:hover {
     background-color: #bad;
   }
-  
-  .penned .square-text {
+  .pen .square-text {
     color: #2C50A2;
   }
   
-  .control {
-    border-radius: 0.5em;
-    background: #eee;
-    background-image: -webkit-linear-gradient(top, #eee, #ddd);
-    background-image: -moz-linear-gradient(top, #eee, #ddd);
-    background-image: -ms-linear-gradient(top, #eee, #ddd);
-    background-image: -o-linear-gradient(top, #eee, #ddd);
-    background-image: linear-gradient(to bottom, #eee, #ddd);
-  }
   
-  .control:hover, .num-select.active {
-    background: #bbb;
-    background-image: -webkit-linear-gradient(top, #bbb, #aaa);
-    background-image: -moz-linear-gradient(top, #bbb, #aaa);
-    background-image: -ms-linear-gradient(top, #bbb, #aaa);
-    background-image: -o-linear-gradient(top, #bbb, #aaa);
-    background-image: linear-gradient(to bottom, #bbb, #aaa);
+  // the css related to the look and behaviour of the tools and
+  // number pallet
+  .controls-outer {
+    .controls-inner {
+      padding-top: 22%; // defines aspect ratio
     
-    font-weight: bold;
-  }
-  
-  #pencil, #pen {
-    height: 48%;
-    width: 33%;
-  }
-  
-  .hi-lighter, .eraser, .num-select {
-    height: 48%;
-  }
-  
-  .image-container {
-    height: 100%;
-    width: 100%;
-    background-size: 100%;
-  }
-  
-  .image-pencil {
-    background-image: image-url("inactive-pencil.png");
-  }
-  
-  .image-pencil:hover, .image-pencil.active {
-    background-image: image-url("active-pencil.png");
-  }
-  
-  .image-pen {
-    background-image: image-url("inactive-pen.png");
-  }
-  
-  .image-pen:hover, .image-pen.active{
-    background-image: image-url("active-pen.png");
-  }
-  
-  .image-eraser {
-    background-image: image-url("inactive-eraser.png");
-  }
-  
-  .image-eraser:hover, .image-eraser.active{
-    background-image: image-url("active-eraser.png");
-  }
-  
-  .image-highlighter {
-    background-image: image-url("inactive-highlighter.png");
-  }
-  
-  .image-red-highlighter:hover, .image-red-highlighter.active {
-    background-image: image-url("active-red-highlighter.png");
-  }
-  
-  .image-blue-highlighter:hover, .image-blue-highlighter.active {
-    background-image: image-url("active-blue-highlighter.png");
-  }
-  
-  .form-container {
-    background-color: #eee;
-    padding: 1em;
-    margin-top: 1em;
-  }
-  
-  #error_explanation {
-    color: red;
-    ul {
-      color: red;
-      margin: 0 0 0.3em 0;
+      .control {
+        border-radius: 0.5em;
+        background: #eee;
+        background-image: -webkit-linear-gradient(top, #eee, #ddd);
+        background-image: -moz-linear-gradient(top, #eee, #ddd);
+        background-image: -ms-linear-gradient(top, #eee, #ddd);
+        background-image: -o-linear-gradient(top, #eee, #ddd);
+        background-image: linear-gradient(to bottom, #eee, #ddd);
+      }
+      
+      .control:hover, .num-select.active {
+        background: #bbb;
+        background-image: -webkit-linear-gradient(top, #bbb, #aaa);
+        background-image: -moz-linear-gradient(top, #bbb, #aaa);
+        background-image: -ms-linear-gradient(top, #bbb, #aaa);
+        background-image: -o-linear-gradient(top, #bbb, #aaa);
+        background-image: linear-gradient(to bottom, #bbb, #aaa);
+        
+        font-weight: bold;
+      }
+      
+      
+      #pencil, #pen {
+        height: 48%;
+        width: 33%;
+      }
+      
+      .hi-lighter, .eraser, .num-select {
+        height: 48%;
+      }
+      
+      .image-container {
+        height: 100%;
+        width: 100%;
+        background-size: 100%;
+      }
+      
+      .image-pencil {
+        background-image: image-url("inactive-pencil.png");
+      }
+      
+      .image-pencil:hover, .active.tool .image-pencil {
+        background-image: image-url("active-pencil.png");
+      }
+      
+      .image-pen {
+        background-image: image-url("inactive-pen.png");
+      }
+      
+      .image-pen:hover, .active.tool .image-pen{
+        background-image: image-url("active-pen.png");
+      }
+      
+      .image-eraser {
+        background-image: image-url("inactive-eraser.png");
+      }
+      
+      .image-eraser:hover, .active.tool .image-eraser{
+        background-image: image-url("active-eraser.png");
+      }
+      
+      .image-highlighter {
+        background-image: image-url("inactive-highlighter.png");
+      }
+      
+      .image-red-highlighter:hover, .active.tool .image-red-highlighter {
+        background-image: image-url("active-red-highlighter.png");
+      }
+      
+      .image-blue-highlighter:hover, .active.tool .image-blue-highlighter {
+        background-image: image-url("active-blue-highlighter.png");
+      }
     }
   }
   
-  .inner{
-    
-    .btn {
-      background-color: #555;
-      border-color: #333;
-    }
-    .btn:hover {
-      background-color: #777;
-    }
-    .form-control {
-      margin-bottom: 1em;
-    }
-  }
 }
+
+// the responsive styles of the page, along with all the responsive
+// features of bootstrap, this helps adjust the size of the puzzle for
+// mobile devices.
 
 @media (max-width: $screen-xs-max) {
   body.controller-games {
@@ -232,8 +263,8 @@ body.controller-games {
 @media (min-width: $screen-md-max) {
   body.controller-games {
     .outer {
-      padding-left: 35%;
-      padding-right: 35%;
+      padding-left: 32%;
+      padding-right: 32%;
     }
   }
 }
