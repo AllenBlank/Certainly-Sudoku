@@ -2,32 +2,24 @@
     <div class="inner puzzle-inner">
         <div id="game-<%= @game.id %>" class="puzzle scaled-container">
             
-            <% 81.times do |i|
-                
-                square_state = @board_state[i.to_s]
-                
-                square_class = ""
-                square_class += "thick-top "    if i / 9 == 0 # the first row gets a top border
-                square_class += "thick-left "   if i % 9 == 0 # the first col gets a left border
-                square_class += "thick-right "  if i % 3 == 2 # every third square gets a right border
-                square_class += "thick-bottom " if (i % 27) > 17 # every third row gets a bottom border (this could be smarter)
-                square_class += square_state["classes"]
-                
-            %>
-                <div id="<%="square-#{i}" %>" class="<%= "square #{square_class}" %>">
-                    <span class="square-text"> <%= square_state["text"] %></span>
-                    <div class="pencil-container">
-                        <% (1..9).each do |j| 
-                            this_num = j.to_s
-                            insert = j if square_state["pencilMarks"].include? this_num
-                            insert ||= ""
-                        %>
-                            <span class="pencil-text pencil-<%= j %>"><%= insert %></span>
-                        <% end %>
-                    </div>
+        <% 81.times do |i|
+            square_state = @board_state[i.to_s]
+        %>
+            <div id="<%= "square-#{i}" %>" class="<%= square_state["classes"] %>">
+                <span class="square-text"><%= square_state["text"] %></span>
+                <div class="pencil-container">
+                <% (1..9).each do |j| 
+                    this_num = j.to_s
+                    pencil_mark = ""
+                    pencil_mark = j if square_state["pencilMarks"].include? this_num
+                %>
+                    <span class="pencil-text pencil-<%= j %>"><%= pencil_mark %></span>
+                <% end %>
                 </div>
-            <% end %>
+            </div>
             
+        <% end %>
+        
         </div>
     </div>
 </div>

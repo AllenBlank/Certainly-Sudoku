@@ -198,15 +198,11 @@ var BoardState = {
     for(var i = 0; i < 81; i++){
         var square = $('#square-' + i);
         
+        var squareText = square.find('.square-text').text();
         var pencilText = square.find('.pencil-container').text();
         var pencilMarks = "";
         
         var classes = square.attr('class');
-        classes = classes.replace('thick-top', '');
-        classes = classes.replace('thick-left', '');
-        classes = classes.replace('thick-right', '');
-        classes = classes.replace('thick-bottom', '');
-        classes = classes.replace('square', '');
         
         for(var j = 1; j < 10; j++){
           var num = "" + j;
@@ -217,7 +213,7 @@ var BoardState = {
         
         data.boardState[i] = {
             classes: classes,
-            text: square.find('.square-text').text(),
+            text: squareText,
             pencilMarks: pencilMarks
         };
     }

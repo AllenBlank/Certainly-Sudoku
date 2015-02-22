@@ -12,14 +12,19 @@ class Game < ActiveRecord::Base
     81.times do |i|
       text = ""
       classes = ""
+      num = i.to_s
+      board_state[num] = {}
       
       if board[i] != "0" then
         text = board[i]
         classes = "permanent "
       end
+      classes += "square "
+      classes += "thick-top "    if i / 9 == 0 # the first row gets a top border
+      classes += "thick-left "   if i % 9 == 0 # the first col gets a left border
+      classes += "thick-right "  if i % 3 == 2 # every third square gets a right border
+      classes += "thick-bottom " if (i % 27) > 17 # every third row gets a bottom border (this could be smarter)
       
-      num = i.to_s
-      board_state[num] = {}
       
       board_state[num]["classes"] = classes
       board_state[num]["text"] = text 
