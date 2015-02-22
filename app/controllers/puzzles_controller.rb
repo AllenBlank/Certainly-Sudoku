@@ -7,7 +7,8 @@ class PuzzlesController < ApplicationController
   end
   
   def create
-    @puzzle = Puzzle.new(puzzle_parameters)
+    @puzzle = Puzzle.new #to allow default attributes to set
+    @puzzle.attributes = puzzle_parameters
     if @puzzle.save
       redirect_to @puzzle
     else
