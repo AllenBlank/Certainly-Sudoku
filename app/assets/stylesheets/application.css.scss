@@ -66,7 +66,7 @@ body {
 // mobile devices.
 
 @media (max-width: $screen-xs-max) {
-  body.controller-games, body.controller-puzzles, body.controller-users {
+  body.controller-games, body.controller-puzzles, body.controller-users, body.controller-games.action-index {
     font-size: 14px;
     #main-container {
       padding-left: 0px;
@@ -80,7 +80,7 @@ body {
 }
 
 @media (min-width: $screen-sm-min) {
-  body.controller-games, body.controller-puzzles, body.controller-users {
+  body.controller-games, body.controller-puzzles, body.controller-users, body.controller-games.action-index {
     font-size: 16px;
     .navbar-brand {
       position: absolute;
@@ -98,7 +98,7 @@ body {
 }
 
 @media (min-width: $screen-md-max) {
-  body.controller-games, body.controller-puzzles, body.controller-users  {
+  body.controller-games, body.controller-puzzles, body.controller-users, body.controller-games.action-index  {
     .outer {
       padding-left: 32%;
       padding-right: 32%;

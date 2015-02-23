@@ -1,4 +1,4 @@
-body.controller-puzzles, body.controller-users {
+body.controller-puzzles, body.controller-users, body.controller-games.action-index {
   // so you dont see the text selection cursor
   .unselectable {
     -webkit-touch-callout: none;
@@ -63,9 +63,13 @@ body.controller-puzzles, body.controller-users {
           margin-bottom: 1em;
         }
       }
+      
+      .left-padded {
+        padding-left: 10%;
+      }
             
       
-      h1, h2 {
+      h1, h2, h3 {
         font-weight: bold;
       }
       a {
