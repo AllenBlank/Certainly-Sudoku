@@ -1,17 +1,16 @@
 <div class="outer">
-  <div class="inner form-container">
-
-    <h3>All Users</h3>
-
-    <ul class="users">
+  <div class="inner">
+    <div class="pagination-container"><%= will_paginate %></div>
+    <ul class="paginated-list">
       <% @users.each do |user| %>
         <li>
-          <p><strong><%= link_to user.name, user %></strong></p>
+          <h3><%= link_to user.name, user %></h3>
           <p>Facebook User ID: <%= user.uid %></p>
           <p>App User ID: <%= user.id %></p>
+          <h4><%= link_to "Delete", user, method: "delete" %></h4>
         </li>
       <% end %>
     </ul>
-
+    <div class="pagination-container"><%= will_paginate %></div>
   </div>
 </div>
