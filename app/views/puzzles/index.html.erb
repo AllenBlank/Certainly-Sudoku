@@ -1,19 +1,17 @@
 <div class="outer">
   <div class="inner form-container">
-
-    <h3>All Puzzles</h3>
-
-    <ul class="puzzless">
+    <div class="pagination-container"><%= will_paginate %></div>
+    <ul class="paginated-list">
       <% @puzzles.each do |puzzle| %>
         <li>
-          <p><strong><%= link_to "Puzzle ##{puzzle.id}", puzzle %></strong></p>
+          <h3><%= link_to "Puzzle ##{puzzle.id}", puzzle %></h3>
           <p>Board: <%= truncate puzzle.board, length: 15 %></p>
           <p>Rating: <%= puzzle.rating %></p>
           <p>Difficulty: <%= puzzle.difficulty %></p>
-          <p><%= link_to "Delete", puzzle, method: "delete" %></p>
+          <h4><%= link_to "Delete", puzzle, method: "delete" %></h4>
         </li>
       <% end %>
     </ul>
-
+    <div class="pagination-container"><%= will_paginate %></div>
   </div>
 </div>

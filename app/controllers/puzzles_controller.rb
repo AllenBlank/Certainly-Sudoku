@@ -28,7 +28,7 @@ class PuzzlesController < ApplicationController
   end
   
   def index
-    @puzzles = Puzzle.all
+    @puzzles = Puzzle.paginate(page: params[:page], per_page: 5)
 #    render json: @puzzles
   end
   
