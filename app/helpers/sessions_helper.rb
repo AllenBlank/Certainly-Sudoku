@@ -5,9 +5,10 @@ module SessionsHelper
     session[:user_id] = user.id
   end
   
-  # Logs in the given user.
+  # Logs out the given user.
   def log_out
     session[:user_id] = nil
+    session[:current_game_id] = nil
   end
 
   # Returns the current logged-in user (if any).
@@ -21,7 +22,7 @@ module SessionsHelper
   end
   
   def is_admin?
-    current_user.admin
+    logged_in? && current_user.admin
   end
   
   def check_is_admin
@@ -36,9 +37,21 @@ module SessionsHelper
     end
   end
   
-  def bounce_chumps(msg)
+  def bounce_chumps(msg, url=root_url)
       flash[:danger] = msg
       redirect_to root_url
+  end
+  
+  def current_game
+    @current_game ||= Game.find( session[:current_game_id] )
+  end
+  
+  def has_current_game?
+    !session[:current_game_id].nil?
+  end
+  
+  def set_current_game(game)
+    session[:current_game_id] = game.id
   end
   
 end

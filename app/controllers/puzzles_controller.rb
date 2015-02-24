@@ -1,6 +1,5 @@
 class PuzzlesController < ApplicationController
-  #respond_to :js, only: [:show, :destroy, :create]
-  before_action :check_logged_in, :check_is_admin
+  before_action :check_is_admin
   
   def new
     @puzzle = Puzzle.new

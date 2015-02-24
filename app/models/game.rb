@@ -46,6 +46,10 @@ class Game < ActiveRecord::Base
     true
   end
   
+  def has_user?
+    !self.user.nil?
+  end
+  
   private
     
     def ensure_valid_board_state

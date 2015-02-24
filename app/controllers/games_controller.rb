@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
-
+  before_action :set_game, :check_is_correct_user, only: [:show, :update]
+  
   def index
     @user = User.find( params[:users_id] )
     @games = @user.games
@@ -7,7 +8,7 @@ class GamesController < ApplicationController
   end
   
   def new
-    
+    create
   end
   
   def create
@@ -35,6 +36,13 @@ class GamesController < ApplicationController
   
   def show
     @game = Game.find( params[:id] )
+    
+    set_current_game @game
+    
+    if logged_in? && current_game.has_user? == false
+      @game.update user: current_user
+    end
+    
     @board_state = @game.board_state  #find this string extension in core_class_extensions.rb in initializers.
   end
   
@@ -48,5 +56,19 @@ class GamesController < ApplicationController
       @game.update( board_state: board_state)
     end
   end
+  
+  private
+  
+    def set_game
+      @game = Game.find( params[:id] )
+    end
+    
+    def is_correct_user?
+      current_user == @game.user
+    end
+    
+    def check_is_correct_user
+      bounce_chumps "You're the wrong user or not logged in." unless is_correct_user? || is_admin?
+    end
   
 end
