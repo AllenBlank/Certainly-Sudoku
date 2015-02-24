@@ -17,7 +17,7 @@ class GamesController < ApplicationController
     selected_difficulty ||= "middling"
     puzzle_possibilities = Puzzle.where(difficulty: selected_difficulty)
     user = current_user
-    
+
     if user
       puzzle_possibilities -= user.puzzles
       puzzle = puzzle_possibilities.sample
@@ -31,7 +31,6 @@ class GamesController < ApplicationController
     session[:current_game_id] = @game.id
     
     redirect_to @game
-    
   end
   
   def show

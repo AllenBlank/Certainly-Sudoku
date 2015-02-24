@@ -1,6 +1,7 @@
 class Puzzle < ActiveRecord::Base
   has_many :games, dependent: :destroy
   has_many :users, through: :games
+  after_initialize :set_defaults
   
   
   # the regex does the length requirement too.
@@ -22,8 +23,6 @@ class Puzzle < ActiveRecord::Base
   validates :rating,
     presence: true,
     format: {with: VALID_RATING_REGEX}
-    
-  after_initialize :set_defaults
   
   private
   
