@@ -38,7 +38,7 @@ class GamesController < ApplicationController
     
     set_current_game @game
     
-    if logged_in? && current_game.has_user? == false
+    unless logged_in? && current_game.has_user?
       @game.update user: current_user
     end
     
@@ -63,7 +63,7 @@ class GamesController < ApplicationController
     end
     
     def is_correct_user?
-      current_user == @game.user
+      (current_user == @game.user) || @game.user.nil?
     end
     
     def check_is_correct_user

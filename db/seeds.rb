@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+puzzle_seeds = YAML.load_file('db/puzzle_seeds.yml')
+
+puzzle_seeds.each do |num, seed|
+  Puzzle.create seed
+end
