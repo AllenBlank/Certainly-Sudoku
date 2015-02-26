@@ -3,12 +3,25 @@
 
 var Resizer = {
   
-  resizeRatio: 0.75,
-
+  textResizeRatio: 0.75,
+  puzzleWidthHeigthRatio: 0.75,
+  
   resize: function() {
+    var windowHeight = $(window).height() - 50;
+    this.setPuzzleWidth( windowHeight * this.puzzleWidthHeigthRatio);
+    this.resizeText();
+  },
+  setPuzzleWidth: function(width) {
+    var windowWidth  = $(window).width();
+    var x = (windowWidth - width) / 2;
+    if (x < 0) { x = 10 }
+    $('.outer').css("padding-left",x);
+    $('.outer').css("padding-right",x);
+  },
+  resizeText: function() {
     var squareSize = $('.square').width();
-    $('.square-text').css('font-size', squareSize * this.resizeRatio);
-    $('.pencil-text').css('font-size', squareSize * this.resizeRatio * 0.33);
+    $('.square-text').css('font-size', squareSize * this.textResizeRatio);
+    $('.pencil-text').css('font-size', squareSize * this.textResizeRatio * 0.33);
   }
 };
 
