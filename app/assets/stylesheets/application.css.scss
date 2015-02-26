@@ -29,13 +29,12 @@ html, body, #main-container {
 }
 
 body {
-  background: #000;
+  background-color: #ccc;
   
   #main-container {
     padding: 0px;
-    background-color: #ccc;
     min-height: 100%;
-    height: auto !important;
+    //height: auto !important;
     height: 100%;
     margin: 0px;
     width: 100%;
