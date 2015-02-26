@@ -16,11 +16,12 @@
           <ul class="dropdown-menu" role="menu">
           <% if params[:controller] == "games" && params[:action] == "show" %>
             <li><a id="save-button" href="javascript:void(0)">Save Game</a></li>
+            <li role="presentation" class="divider"></li>
           <% end %>
             <li><%= link_to "New Game (Easy)", "/games?difficulty=easy", method: :post %></li>
             <li><%= link_to "New Game (Middling)", "/games?difficulty=middling", method: :post %></li>
             <li><%= link_to "New Game (Tough)", "/games?difficulty=tough", method: :post %></li>
-            
+            <li role="presentation" class="divider"></li>
           <% if logged_in? %>
             <li><%= link_to "Game History", controller: "games", action: "index", users_id: current_user.id %></li>
             <li><%= link_to "Sign Out", signout_path %></li>

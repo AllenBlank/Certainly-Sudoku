@@ -258,15 +258,19 @@ var Mouse = {
 };
 
 // resize the text on a window adjustment
-$(window).on('orientationchange resize', function() {Resizer.resize();} );
+
 
 // once the page has loaded, all bindings are made and the text size
 // is set appropriately.
 $(document).on('page:load ready', function(){
   
+  // this line makes the bindings only work on the games show... sloppy but
+  // you'd be surprised how ugly all the other solutions are too.
+  if( !$('body').hasClass('controller-games action-show') ){ return; }
+  
+  $(window).on('orientationchange resize', function() {Resizer.resize();} );  
   Resizer.resize();
   
-
   $.fn.extend(NumberPallet.helpers);
   $.fn.extend(Square.helpers);
   $.fn.extend(Tool.helpers);
