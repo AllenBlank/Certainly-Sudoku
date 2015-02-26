@@ -1,7 +1,7 @@
 class Puzzle < ActiveRecord::Base
   has_many :games, dependent: :destroy
   has_many :users, through: :games
-  after_initialize :set_defaults
+  before_save :set_defaults
   
   
   # the regex does the length requirement too.
@@ -27,9 +27,7 @@ class Puzzle < ActiveRecord::Base
   private
   
     def set_defaults
-      if self.new_record?
-        self.rating = 3 
-        self.difficulty = 'middling'
-      end
+      self.rating ||= 3 
+      self.difficulty ||= 'middling'
     end
 end

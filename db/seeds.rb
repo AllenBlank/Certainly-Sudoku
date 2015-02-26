@@ -9,5 +9,6 @@
 puzzle_seeds = YAML.load_file('db/puzzle_seeds.yml')
 
 puzzle_seeds.each do |num, seed|
-  Puzzle.create seed
+  puzz = Puzzle.new
+  puzz.update seed
 end
