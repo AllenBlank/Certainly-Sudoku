@@ -78,7 +78,7 @@ class GamesController < ApplicationController
     end
     
     def correct_user_for_index
-      unless is_admin? || current_user.id == params[:users_id] 
+      unless is_admin? || current_user.id == params[:users_id].to_i 
         bounce_chumps "You're the wrong user or not logged in."
       end
     end
