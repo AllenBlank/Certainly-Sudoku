@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
-  before_action :set_game, :check_is_correct_user, only: [:show, :update]
+  before_action :set_game, :check_is_correct_user, only: [:show, :update, :destroy]
+  before_action :correct_user_for_index, only: [:index]
   
   def index
     @user = User.find( params[:users_id] )
@@ -31,6 +32,12 @@ class GamesController < ApplicationController
     session[:current_game_id] = @game.id
     
     redirect_to @game
+  end
+  
+  def destroy
+    flash[:success] = "Game #{@game.id} deleted."
+    @game.destroy
+    redirect_to controller: "games", action: "index", users_id: current_user.id
   end
   
   def show
@@ -68,6 +75,12 @@ class GamesController < ApplicationController
     
     def check_is_correct_user
       bounce_chumps "You're the wrong user or not logged in." unless is_correct_user? || is_admin?
+    end
+    
+    def correct_user_for_index
+      unless is_admin? || current_user.id == params[:users_id] 
+        bounce_chumps "You're the wrong user or not logged in."
+      end
     end
   
 end

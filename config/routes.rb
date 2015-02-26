@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   
   resources :puzzles, only: [:new, :create, :show, :destroy, :index]
   
-  resources :games, only: [:new, :show, :create, :update]
+  resources :games, only: [:new, :show, :create, :update, :destroy]
   get '/users/:users_id/games', to: 'games#index'
   
   resources :users, only: [:show, :destroy, :index]

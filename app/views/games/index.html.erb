@@ -5,8 +5,11 @@
       <% @games.each do |game| %>
         <li>
           <h3><%= link_to "Game ID: #{game.id}", game %></h3>
-          <h4><%= link_to "Delete", game, method: "delete" %></h4>
+          <h4><%= link_to "Delete", game, method: "delete", data: { confirm: "Delete this game?" } %></h4>
         </li>
+      <% end %>
+      <% if @games.length == 0 %>
+        <h3>No games to display...</h3>
       <% end %>
     </ul>
     <div class="pagination-container"><%= will_paginate %></div>

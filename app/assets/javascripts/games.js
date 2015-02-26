@@ -184,12 +184,6 @@ var NumberPallet = {
 var BoardState = {
   
   current: {},
-  
-  save: function() {
-    var gameID = $('.puzzle').attr('id').replace('game-','');
-    this.generate();
-    this.sendJSON('/games/' + gameID, 'PATCH', this.current);
-  },
 
   generate: function() {
     var data = {};
@@ -222,13 +216,21 @@ var BoardState = {
     return data;
   },
 
-  sendJSON: function(url,method,data) {
-    $.ajax({
-        url: url,
-        type: method,
-        data: JSON.stringify(data),
-        contentType: "application/json",
-    });
+  save: function() {
+    var oldState = JSON.stringify( this.current );
+    var newState = JSON.stringify( this.generate() );
+    
+    if(newState !== oldState){
+      $.ajax({
+          type: 'PATCH',
+          data: newState,
+          contentType: "application/json",
+          asynch: false,
+          error:    function() {},
+          sucess:   function() {},
+          complete: function() {},
+      });
+    }
   }
 
 };
@@ -265,4 +267,8 @@ $(document).on('page:load ready', function(){
   $('.tool').on("mousedown", Tool.onMouseDown);
   $('#eraser').on("dblclick", Tool.eraser.doubleClick);
   
+  $('#save-button').on('mousedown', function() { BoardState.save(); });
+  
+  clearInterval(saveInterval);
+  var saveInterval = setInterval(function() { BoardState.save(); }, 120000);
 });
