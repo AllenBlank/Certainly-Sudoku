@@ -93,8 +93,14 @@ body.controller-games {
       display: block;
     }
   }
+  .square.pen {
+    color: #2C50A2;
+  }
   .square.bold {
     font-weight:bold;
+  }
+  .square.collided {
+    color: red;
   }
   
   // for the creation of the grid effect on the puzzle
@@ -132,9 +138,6 @@ body.controller-games {
   }
   .square.redHighlighter.blueHighlighter:hover {
     background-color: #bad;
-  }
-  .pen .square-text {
-    color: #2C50A2;
   }
   
   

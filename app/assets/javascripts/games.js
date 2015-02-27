@@ -45,8 +45,50 @@ var Square = {
         text = $(this).find('.square-text').text();
       }
       return text.indexOf(number) != -1;
+    },
+    squareNumber: function() {
+      return +$(this).attr('id').replace("square-","");
+    },
+    
+  }
+};
+
+var Puzzle = {
+  board: {},
+  setup: function() {
+    for(var i = 0;i < 81; i++){
+      this.board[i] = {};
+      this.board[i].obj = $('#square-' + i);
+      this.board[i].col = i % 9;
+      this.board[i].row = Math.floor(i / 9);
+      this.board[i].box = Math.floor( this.board[i].row / 3 ) * 3 + Math.floor(this.board[i].col / 3);
+    }
+    for(var i = 0;i < 81; i++){
+      this.board[i].neighbors = [];
+      for(var j = 0;j < 81; j++){
+        if(this.board[i].col === this.board[j].col ||
+           this.board[i].row === this.board[j].row ||
+           this.board[i].box === this.board[j].box 
+           ) {
+          this.board[i].neighbors.push(j);
+        }
+      }
+    }
+  },
+  highlightCollision: function(squareNumber, markedNumber) {
+    var neighbors = this.board[squareNumber].neighbors;
+    for(var i = 0;i < neighbors.length; i++) {
+      var j = neighbors[i];
+      var neighbor = this.board[j].obj;      
+      if(neighbor.hasNumber(markedNumber)){
+        neighbor.addClass('collided');
+        var scoper = function(neighbor){
+          window.setTimeout(function(){ neighbor.removeClass('collided') }, 2000);
+        }(neighbor);
+      }
     }
   }
+  
 };
 
 var Tool = {
@@ -60,9 +102,15 @@ var Tool = {
   
   pen: {
     down : function($square){
-      if ( !$square.isPermanent() && NumberPallet.active) {
-        $square.markWithPen( NumberPallet.active );
-        NumberPallet.boldEachActive();
+      var num = NumberPallet.active;
+      if ( !$square.isPermanent() && num) {
+        if($square.isInPen() && $square.hasNumber(num) ) {
+          $square.markWithPen( "" );
+        }else{
+          $square.markWithPen( NumberPallet.active );
+          NumberPallet.boldEachActive();
+          Puzzle.highlightCollision($square.squareNumber(), +num);
+        }
       }
     },
     enter: function($square){ },
@@ -300,6 +348,8 @@ $(document).on('page:load ready', function(){
   // this line makes the bindings only work on the games show... sloppy but
   // you'd be surprised how ugly all the other solutions are too.
   if( !$('body').hasClass('controller-games action-show') ){ return; }
+  
+  Puzzle.setup();
   
   $(window).on('orientationchange resize', function() {Resizer.resize();} );  
   Resizer.resize();
