@@ -249,12 +249,37 @@ var BoardState = {
 };
 
 
-//track mousedown
+// track mousedown, and some absurd wizardry to emulate functionality
+// that should have always existed in touch events.
 var Mouse = {
   isDown: false,
+  clickedRecently: false,
   
-  onMouseDown: function(){ Mouse.isDown = true;},
-  onMouseUp:   function(){ Mouse.isDown = false;}
+  onMouseDown: function(e){ 
+    Mouse.isDown = true;
+  },
+  onMouseUp:   function(e){ 
+    Mouse.isDown = false;
+  },
+  emulateMouseEnter: function(e) {
+    e.preventDefault();
+    if(Mouse.isDown) {
+      var touch = e.touches[0];
+      var element = document.elementFromPoint(touch.pageX, touch.pageY);
+      //$('.navbar-brand').text($(element).attr('class'));
+      $(element).trigger('mouseenter');
+    }
+  },
+  emulateDoubleClick: function() {
+    if( Mouse.clickedRecently ) {
+      $(this).trigger('dblclick');
+    }
+    Mouse.clickedRecently = true;
+    window.setTimeout(function(){
+      Mouse.clickedRecently = false;
+    },300);
+  }
+  
 };
 
 // resize the text on a window adjustment
@@ -275,8 +300,10 @@ $(document).on('page:load ready', function(){
   $.fn.extend(Square.helpers);
   $.fn.extend(Tool.helpers);
   
-  $(document).on("mousedown", Mouse.onMouseDown);
-  $(document).on("mouseup",   Mouse.onMouseUp);
+  $(document).on("touchstart mousedown", Mouse.onMouseDown);
+  $(document).on("touchend mouseup",   Mouse.onMouseUp);
+  $('.tool').on("touchstart", Mouse.emulateDoubleClick );
+  document.addEventListener('touchmove', Mouse.emulateMouseEnter, false);
   
   $('.square').on("mousedown", Square.onMouseDown);
   $('.square').on("mouseenter", Square.onMouseEnter);
@@ -285,7 +312,6 @@ $(document).on('page:load ready', function(){
   $('#eraser').on("dblclick", Tool.eraser.doubleClick);
   
   $('#save-button').on('mousedown', function() { BoardState.save(); });
-  
   clearInterval(saveInterval);
   var saveInterval = setInterval(function() { BoardState.save(); }, 120000);
 });
