@@ -303,7 +303,6 @@ $(document).on('page:load ready', function(){
   
   $(window).on('orientationchange resize', function() {Resizer.resize();} );  
   Resizer.resize();
-  $('button.navbar-toggle').on('mousedown', function() {$('.dropdown-toggle').trigger('click');});
   
   $.fn.extend(NumberPallet.helpers);
   $.fn.extend(Square.helpers);
@@ -320,7 +319,10 @@ $(document).on('page:load ready', function(){
   $('.tool').on("touchstart mousedown", Tool.onMouseDown);
   $('#eraser').on("dblclick", Tool.eraser.doubleClick);
   
-  $('#save-button').on('mousedown', function() { BoardState.save(); });
+  $('#save-button').on('mousedown', function() { 
+    BoardState.save(); 
+    $("button.navbar-toggle").trigger('click');
+  });
   clearInterval(saveInterval);
   var saveInterval = setInterval(function() { BoardState.save(); }, 120000);
 });

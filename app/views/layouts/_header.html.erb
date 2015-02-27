@@ -11,25 +11,26 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
+      <% if params[:controller] == "games" && params[:action] == "show" %>
+        <li><a id="save-button" href="javascript:void(0)">Save Game</a></li>
+      <% end %>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">New Game</a>
           <ul class="dropdown-menu" role="menu">
-          <% if params[:controller] == "games" && params[:action] == "show" %>
-            <li><a id="save-button" href="javascript:void(0)">Save Game</a></li>
-            <li role="presentation" class="divider"></li>
-          <% end %>
             <li><%= link_to "New Game (Easy)", "/games?difficulty=easy", method: :post %></li>
             <li><%= link_to "New Game (Middling)", "/games?difficulty=middling", method: :post %></li>
             <li><%= link_to "New Game (Tough)", "/games?difficulty=tough", method: :post %></li>
-            <li role="presentation" class="divider"></li>
+          </ul>
+        </li>
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account</a>
+          <ul class="dropdown-menu" role="menu">
           <% if logged_in? %>
             <li><%= link_to "Game History", controller: "games", action: "index", users_id: current_user.id %></li>
             <li><%= link_to "Sign Out", signout_path %></li>
-              
           <% else %>
-            
             <li><%= link_to "Sign In", signin_path %></li>
-              
           <% end %>
 
             
