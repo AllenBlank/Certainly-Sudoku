@@ -26,7 +26,11 @@ var Resizer = {
 };
 
 var Square = {
-  onMouseDown : function() { Tool[Tool.active].down(  $(this) ) },
+  onMouseDown : function(e) { 
+    e.preventDefault();
+    //e.stopPropagation();
+    Tool[Tool.active].down(  $(this) ); 
+  },
   onMouseEnter: function() { Tool[Tool.active].enter( $(this) ) },
   
   helpers: {
@@ -46,7 +50,9 @@ var Square = {
 };
 
 var Tool = {
-  onMouseDown: function() {
+  onMouseDown: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
     $(this).setActiveTool();
   },
   
@@ -167,7 +173,9 @@ var Tool = {
 };
 
 var NumberPallet = {
-  onMouseDown: function() {
+  onMouseDown: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
     $(this).setActiveNumber();
     NumberPallet.boldEachActive();
   },
@@ -295,6 +303,7 @@ $(document).on('page:load ready', function(){
   
   $(window).on('orientationchange resize', function() {Resizer.resize();} );  
   Resizer.resize();
+  $('button.navbar-toggle').on('mousedown', function() {$('.dropdown-toggle').trigger('click');});
   
   $.fn.extend(NumberPallet.helpers);
   $.fn.extend(Square.helpers);
@@ -305,10 +314,10 @@ $(document).on('page:load ready', function(){
   $('.tool').on("touchstart", Mouse.emulateDoubleClick );
   document.addEventListener('touchmove', Mouse.emulateMouseEnter, false);
   
-  $('.square').on("mousedown", Square.onMouseDown);
+  $('.square').on("touchstart mousedown", Square.onMouseDown);
   $('.square').on("mouseenter", Square.onMouseEnter);
-  $('.num-select').on("mousedown", NumberPallet.onMouseDown);
-  $('.tool').on("mousedown", Tool.onMouseDown);
+  $('.num-select').on("touchstart mousedown", NumberPallet.onMouseDown);
+  $('.tool').on("touchstart mousedown", Tool.onMouseDown);
   $('#eraser').on("dblclick", Tool.eraser.doubleClick);
   
   $('#save-button').on('mousedown', function() { BoardState.save(); });
