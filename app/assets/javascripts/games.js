@@ -66,6 +66,7 @@ var Puzzle = {
     for(var i = 0;i < 81; i++){
       this.board[i].neighbors = [];
       for(var j = 0;j < 81; j++){
+        if(j === i) continue;
         if(this.board[i].col === this.board[j].col ||
            this.board[i].row === this.board[j].row ||
            this.board[i].box === this.board[j].box 
