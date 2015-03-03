@@ -1,0 +1,16 @@
+cp "Behavioral Targeting Opt-Out 1.jpg.jpg" redo/
+cp "callbacks 2.jpg" redo/
+cp "cross promo campaigns 1.jpg" redo/
+cp "cross promo campaigns 3.jpg" redo/
+cp "Marmalade Extension 1.jpg" redo/
+cp "new_dash_overview_3.jpg" redo/
+cp "new_dash_overview_9.jpg" redo/
+cp "payments 1 copy.jpg" redo/
+cp "post install analytics 10.jpg" redo/
+cp "post install analytics 11.jpg" redo/
+cp "retargeting 1.jpg" redo/
+cp "Troubleshooting 1.jpg" redo/
+cp "Troubleshooting 2.jpg" redo/
+cp "Troubleshooting 3.jpg" redo/
+cp "Troubleshooting 5.jpg" redo/
+cp "user management 1.jpg" redo/

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218042856) do
+ActiveRecord::Schema.define(version: 20150302202648) do
 
   create_table "games", force: true do |t|
     t.datetime "started_at"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20150218042856) do
     t.integer  "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "solution"
   end
 
   add_index "puzzles", ["board"], name: "index_puzzles_on_board", unique: true

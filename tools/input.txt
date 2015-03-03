@@ -1,0 +1,16 @@
+Behavioral Targeting Opt-Out 1.jpg: Remove stuff at bottom left
+callbacks 2: Feedback tab still present
+cross promo campaigns 1: Feedback tab still present
+cross promo campaigns 3: Remove stuff at bottom left
+Marmalade Extension 1: Remove stuff at bottom left
+new_dash_overview_3: Remove stuff at bottom left
+new_dash_overview_9: Remove stuff at bottom left
+payments 1 copy: Remove stuff at bottom left
+post install analytics 10: Feedback tab still present
+post install analytics 11: Feedback tab still present
+retargeting 1: Feedback tab still present
+Troubleshooting 1: Remove stuff at bottom left
+Troubleshooting 2: Remove stuff at bottom left
+Troubleshooting 3: Remove stuff at bottom left
+Troubleshooting 5: Remove stuff at bottom left
+user management 1: Remove stuff at bottom left
