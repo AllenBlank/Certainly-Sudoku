@@ -299,9 +299,9 @@ var BoardState = {
           data: newState,
           contentType: "application/json",
           asynch: false,
-          error:    function() {alert('error!');},
-          sucess:   function() {alert('success!');},
-          complete: function(o) {alert(o.responseJSON.completionTime);},
+          error:    function() {console.log('error');},
+          sucess:   function() {console.log('success');},
+          complete: function(o) {console.log(o.responseJSON.completionTime);},
       });
     }
   }

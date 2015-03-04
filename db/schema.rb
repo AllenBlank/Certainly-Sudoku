@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150302202648) do
+ActiveRecord::Schema.define(version: 20150304032958) do
 
   create_table "games", force: true do |t|
     t.datetime "started_at"
@@ -20,10 +20,12 @@ ActiveRecord::Schema.define(version: 20150302202648) do
     t.text     "board_state"
     t.integer  "user_id"
     t.integer  "puzzle_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.datetime "last_played_at"
   end
 
+  add_index "games", ["last_played_at"], name: "index_games_on_last_played_at"
   add_index "games", ["puzzle_id"], name: "index_games_on_puzzle_id"
   add_index "games", ["user_id"], name: "index_games_on_user_id"
 

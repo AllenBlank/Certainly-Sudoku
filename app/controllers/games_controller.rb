@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   
   def index
     @user = User.find( params[:users_id] )
-    @games = @user.games
+    @games = @user.games.order('last_played_at DESC')
     @games = @games.paginate(page: params[:page], per_page: 5)
   end
   
@@ -43,6 +43,7 @@ class GamesController < ApplicationController
   def show
     
     set_current_game @game
+    @game.update last_played_at: Time.now 
     
     unless logged_in? && current_game.has_user?
       @game.update user: current_user
@@ -57,7 +58,7 @@ class GamesController < ApplicationController
     board_state = params[:boardState]
     
     if is_solved?
-      @game.update(completed_at: Time.now) if @game.completed_at.nil?
+      @game.update completed_at: Time.now if @game.completed_at.nil?
       @solved = true
       @completion_time = (@game.completed_at - @game.created_at)
     end

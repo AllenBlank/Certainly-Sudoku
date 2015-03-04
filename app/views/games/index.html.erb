@@ -4,8 +4,10 @@
     <ul class="paginated-list">
       <% @games.each do |game| %>
         <li>
-          <h3><%= link_to "Game ID: #{game.id}", game %></h3>
-          <h4><%= link_to "Delete", game, method: "delete", data: { confirm: "Delete this game?" } %></h4>
+          <h3><%= link_to "#{game.puzzle.difficulty.capitalize} Game", game %></h3>
+          <p>Last played <%= time_ago_in_words game.last_played_at %> ago.</p>
+          <p><%= game.completed_at ? "Solved in #{distance_of_time_in_words(game.completed_at - game.created_at) }." : "This game is unfishished, a terrible shame." %></p>
+          <h5><%= link_to "(Delete)", game, method: "delete", data: { confirm: "Delete this game?" } %></h5>
         </li>
       <% end %>
       <% if @games.length == 0 %>
