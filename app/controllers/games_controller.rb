@@ -41,7 +41,6 @@ class GamesController < ApplicationController
   end
   
   def show
-    @game = Game.find( params[:id] )
     
     set_current_game @game
     
@@ -53,14 +52,20 @@ class GamesController < ApplicationController
   end
   
   def update
-    @game = Game.find( params[:id] )
     correct_user = @game.user
     
     board_state = params[:boardState]
     
+    if is_solved?
+      @game.update(completed_at: Time.now) if @game.completed_at.nil?
+      @solved = true
+      @completion_time = (@game.completed_at - @game.created_at)
+    end
+    
     if (current_user == correct_user) 
       @game.update( board_state: board_state)
     end
+    
   end
   
   private

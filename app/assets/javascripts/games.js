@@ -83,9 +83,9 @@ var Puzzle = {
       var neighbor = this.board[j].obj;      
       if(neighbor.hasNumber(markedNumber)){
         neighbor.addClass('collided');
-        var scoper = function(neighbor){
+        (function(neighbor){
           window.setTimeout(function(){ neighbor.removeClass('collided') }, 2000);
-        }(neighbor);
+        }(neighbor));
       }
     }
   }
@@ -258,6 +258,7 @@ var BoardState = {
   generate: function() {
     var data = {};
     data.boardState = {};
+    data.solution = "";
     
     for(var i = 0; i < 81; i++){
         var square = $('#square-' + i);
@@ -265,6 +266,8 @@ var BoardState = {
         var squareText = square.find('.square-text').text();
         var pencilText = square.find('.pencil-container').text();
         var pencilMarks = "";
+        
+        data.solution += squareText;
         
         var classes = square.attr('class');
         
@@ -296,9 +299,9 @@ var BoardState = {
           data: newState,
           contentType: "application/json",
           asynch: false,
-          error:    function() {},
-          sucess:   function() {},
-          complete: function() {},
+          error:    function() {alert('error!');},
+          sucess:   function() {alert('success!');},
+          complete: function(o) {alert(o.responseJSON.completionTime);},
       });
     }
   }
@@ -377,3 +380,14 @@ $(document).on('page:load ready', function(){
   clearInterval(saveInterval);
   var saveInterval = setInterval(function() { BoardState.save(); }, 120000);
 });
+
+// for testing
+function fillPuzzle (str) {
+  var arr = str.split('');
+  for(var i = 0; i < 81;i++){
+    var square = $('#square-'+i);
+    if(!square.isPermanent()){
+      square.markWithPen(arr[i]);
+    }
+  }
+}
