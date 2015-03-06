@@ -8,7 +8,7 @@ var Resizer = {
   
   resize: function() {
     var windowHeight = $(window).height() - 50;
-    this.setPuzzleWidth( windowHeight * this.puzzleWidthHeigthRatio);
+    this.setPuzzleWidth( Math.max(500,windowHeight * this.puzzleWidthHeigthRatio) );
     this.resizeText();
   },
   setPuzzleWidth: function(width) {
@@ -365,8 +365,9 @@ $(document).on('page:load ready', function(){
   $(document).on("touchstart mousedown", Mouse.onMouseDown);
   $(document).on("touchend mouseup",   Mouse.onMouseUp);
   $('.tool').on("touchstart", Mouse.emulateDoubleClick );
-  document.addEventListener('touchmove', Mouse.emulateMouseEnter, false);
-  
+  // 'on' doesn't seem to work quite right, the false there at the end changes
+  // the way the event propagates.
+  $('.inner').get(0).addEventListener('touchmove', Mouse.emulateMouseEnter, false);
   $('.square').on("touchstart mousedown", Square.onMouseDown);
   $('.square').on("mouseenter", Square.onMouseEnter);
   $('.num-select').on("touchstart mousedown", NumberPallet.onMouseDown);
