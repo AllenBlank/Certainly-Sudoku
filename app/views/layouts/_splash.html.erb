@@ -1,0 +1,19 @@
+<div class="splash-background"></div>
+
+<div id="sign-in-splash" class="splash-foreground">
+  <!--<a class="close" href="#">✖</a>-->
+  <h1>Authenticate using</h1>
+
+  <a href=<%= facebook_signin_path %>>
+    <div id="fb-logo" class="provider-logo"></div>
+  </a>
+  <h2>or</h2>
+  <a href=<%= google_signin_path %>>
+    <div id="gp-logo" class="provider-logo"></div>
+  </a>
+</div>
+
+<div style="display:none" class="sloppy-preload">
+  <img src=<%= image_tag "facebook.png" %>>
+  <img src=<%= image_tag "gplus.png" %>>
+</div>

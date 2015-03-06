@@ -2,7 +2,7 @@ class Game < ActiveRecord::Base
   belongs_to :user
   belongs_to :puzzle
   
-  before_save :ensure_valid_board_state
+  before_save :ensure_valid_board_state, :update_last_played
   serialize :board_state
   
   def set_default_board_state
@@ -59,6 +59,10 @@ class Game < ActiveRecord::Base
       classes += "thick-right "  if i % 3 == 2    # every third square gets a right border
       classes += "thick-bottom " if (i % 27) > 17 # every third row gets a bottom border (this could be smarter)
       classes
+    end
+    
+    def update_last_played
+      self.last_played_at = Time.now
     end
   
 end

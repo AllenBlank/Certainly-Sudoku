@@ -18,6 +18,7 @@ gem 'jquery-rails',            '4.0.0.beta2'
 gem 'jbuilder',                '2.2.3'
 gem 'responders',           '~> 2.0'
 gem 'omniauth-facebook',    '~> 2.0'
+gem 'omniauth-google-oauth2'
 gem 'json',                 '~> 1.8.1'
 
 gem 'sdoc',                    '0.4.0', group: :doc

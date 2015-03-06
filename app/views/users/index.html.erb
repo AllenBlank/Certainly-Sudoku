@@ -1,6 +1,6 @@
 <div class="outer">
   <div class="inner">
-    <div class="pagination-container"><%= will_paginate %></div>
+    <div class="pagination-container"><%= will_paginate inner_window: 0, outer_window: 0 %></div>
     <ul class="paginated-list">
       <% @users.each do |user| %>
         <li>
@@ -11,6 +11,6 @@
         </li>
       <% end %>
     </ul>
-    <div class="pagination-container"><%= will_paginate %></div>
+    <div class="pagination-container"><%= will_paginate inner_window: 0, outer_window: 0 %></div>
   </div>
 </div>

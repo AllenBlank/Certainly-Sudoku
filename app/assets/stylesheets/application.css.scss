@@ -30,6 +30,14 @@ html, body, #main-container {
 
 body {
   background-color: #ccc;
+  .nav{
+    li {
+      border-right: 0.1em solid #ddd;
+    }
+    li:last-child {
+      border-right: 0;
+    }
+  } 
   
   #main-container {
     padding: 0px;

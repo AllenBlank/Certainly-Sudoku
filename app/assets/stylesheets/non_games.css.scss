@@ -50,6 +50,9 @@ body.controller-puzzles, body.controller-users, body.controller-games.action-ind
           padding-left: 10%;
           border-bottom: 0.1em solid #CCC;
         }
+        li:last-child {
+          border-bottom: 0;
+        }
       }
       // styling for submission forms and whatnot
       form {

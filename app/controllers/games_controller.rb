@@ -43,7 +43,6 @@ class GamesController < ApplicationController
   def show
     
     set_current_game @game
-    @game.update last_played_at: Time.now 
     
     unless logged_in? && current_game.has_user?
       @game.update user: current_user
@@ -80,7 +79,9 @@ class GamesController < ApplicationController
     end
     
     def check_is_correct_user
-      bounce_chumps "You're the wrong user or not logged in." unless is_correct_user? || is_admin?
+      unless is_correct_user? || is_admin?
+        bounce_chumps "You're the wrong user or not logged in, current game reset." 
+      end
     end
     
     def correct_user_for_index

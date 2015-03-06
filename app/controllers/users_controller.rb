@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @games = @user.games
+    @games = @user.games.paginate(page: params[:page], per_page: 5)
   end
   
   private

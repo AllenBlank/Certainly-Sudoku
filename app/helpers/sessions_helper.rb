@@ -75,4 +75,8 @@ module SessionsHelper
     session[:current_game_id] = game.id
   end
   
+  def reset_current_game
+    session[:current_game_id] = nil;
+  end
+  
 end

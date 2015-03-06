@@ -7,14 +7,7 @@
     <p>Verification Provider: <%= @user.provider %></p>
     <p>ID: <%= @user.id %></p>
     
-    <ul class="games-played">
-      <% @games.each do |game| %>
-        <li>
-          <p><%= link_to "Played Game ##{game.id}", game %></p>
-        </li>
-      <% end %>
-
-    </ul>
+    <h4><%= link_to "Games played", controller: "games", action: "index", users_id: @user.id %></h4>
     </div>
 
   </div>
