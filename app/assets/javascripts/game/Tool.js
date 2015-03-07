@@ -47,7 +47,11 @@ var Tool = {
   },
   redHighlighter: {
     down : function($square){
-      $square.markWithHighlighter("red");
+      if($square.hasClass('redHighlighter')){
+        $square.removeClass('redHighlighter');
+      } else {
+        $square.markWithHighlighter("red");
+      }
     },
     enter: function($square){
       if ( Mouse.isDown ) {
@@ -57,7 +61,11 @@ var Tool = {
   },
   blueHighlighter: {
     down : function($square){
-      $square.markWithHighlighter("blue");
+      if($square.hasClass('blueHighlighter')){
+        $square.removeClass('blueHighlighter');
+      } else {
+        $square.markWithHighlighter("blue");
+      }
     },
     enter: function($square){
       if ( Mouse.isDown ) {

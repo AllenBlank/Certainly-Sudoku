@@ -59,6 +59,10 @@ body.controller-games {
     }
     .square-text {
       //display: none;
+      height: 100%;
+      width: 100%;
+      display: block;
+      overflow: auto;
     }
     .pencil-container {
       padding-top: 2%;
@@ -88,8 +92,9 @@ body.controller-games {
   .square.pen {
     color: #2C50A2;
   }
-  .square.bold {
+  .square.bold .square-text{
     font-weight:bold;
+    background-color: rgba(0, 0, 0, .1);
   }
   .square.collided {
     color: red;
