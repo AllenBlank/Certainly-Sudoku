@@ -1,4 +1,4 @@
-== README
+== README ==
 This is a somewhat simple sudoku app.
 For most users it would serve as a single page app. They come, see a puzzle,
 solve it and start a new one afterwards.
