@@ -5,7 +5,8 @@
       <% @users.each do |user| %>
         <li>
           <h3><%= link_to user.name, user %></h3>
-          <p>Facebook User ID: <%= user.uid %></p>
+          <p>Auth Provider: <%= user.provider %></p>
+          <p>User ID: <%= user.uid %></p>
           <p>App User ID: <%= user.id %></p>
           <h4><%= link_to "Delete", user, method: "delete" %></h4>
         </li>
