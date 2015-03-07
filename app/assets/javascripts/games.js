@@ -5,10 +5,11 @@ var Resizer = {
   
   textResizeRatio: 0.75,
   puzzleWidthHeigthRatio: 0.75,
+  minWidth: 350,
   
   resize: function() {
     var windowHeight = $(window).height() - 50;
-    this.setPuzzleWidth( Math.max(500,windowHeight * this.puzzleWidthHeigthRatio) );
+    this.setPuzzleWidth( Math.max(Resizer.minWidth, windowHeight * this.puzzleWidthHeigthRatio) );
     this.resizeText();
   },
   setPuzzleWidth: function(width) {
@@ -254,6 +255,7 @@ var NumberPallet = {
 var BoardState = {
   
   current: {},
+  lastSaveType: "",
 
   generate: function() {
     var data = {};
@@ -289,7 +291,10 @@ var BoardState = {
     return data;
   },
 
-  save: function() {
+  save: function(saveType) {
+    saveType = typeof saveType !== 'undefined' ? saveType : "auto";
+    this.lastSaveType = saveType;
+    
     var oldState = JSON.stringify( this.current );
     var newState = JSON.stringify( this.generate() );
     
@@ -301,10 +306,17 @@ var BoardState = {
           asynch: false,
           error:    function() {console.log('error');},
           sucess:   function() {console.log('success');},
-          complete: function(o) {console.log(o.responseJSON.completionTime);},
+          complete: function(o) {BoardState.completeSave(o.responseJSON); },
       });
     }
+  },
+  completeSave: function(responseJSON) {
+    if(responseJSON.solved == "true" && BoardState.lastSaveType == "manual"){
+      $('#completion-time').text( responseJSON.completionTime );
+      Splash.splashOn('completion-splash');
+    }
   }
+  
 
 };
 
@@ -375,11 +387,11 @@ $(document).on('page:load ready', function(){
   $('#eraser').on("dblclick", Tool.eraser.doubleClick);
   
   $('#save-button').on('mousedown', function() { 
-    BoardState.save(); 
+    BoardState.save("manual"); 
     $("button.navbar-toggle").trigger('click');
   });
   clearInterval(saveInterval);
-  var saveInterval = setInterval(function() { BoardState.save(); }, 120000);
+  var saveInterval = setInterval(function() { BoardState.save("auto"); }, 120000);
   
   $('#dingdong').on('click', function(){alert('ring'); });
 });

@@ -1,6 +1,6 @@
 <div class="outer">
   <div class="inner">
-    <div class="pagination-container"><%= will_paginate inner_window: 0, outer_window: 0 %></div>
+    <div class="pagination-container"><%= will_paginate inner_window: 0, outer_window: 0, previous_label: '←', next_label: '→' %></div>
     <ul class="paginated-list">
       <% @games.each do |game| %>
         <li>
@@ -14,6 +14,6 @@
         <h3>No games to display...</h3>
       <% end %>
     </ul>
-    <div class="pagination-container"><%= will_paginate inner_window: 0, outer_window: 0 %></div>
+    <div class="pagination-container"><%= will_paginate inner_window: 0, outer_window: 0, previous_label: '←', next_label: '→' %></div>
   </div>
 </div>
