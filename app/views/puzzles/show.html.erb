@@ -5,8 +5,8 @@
     <h5><%= link_to "(Delete)", @puzzle, method: "delete" %></h5>
 
     <p>Board: <%= truncate @puzzle.board, length: 15 %></p>
-    <p>Rating: <%= @puzzle.rating %></p>
-    <p>Difficulty: <%= @puzzle.difficulty %></p>
+    <p>Rating: <%= @puzzle.rating.capitalize %></p>
+    <p>Difficulty: <%= @puzzle.difficulty.capitalize %></p>
     
     <ul class="games-played">
       <% @puzzle.games.each do |game| %>

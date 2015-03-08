@@ -19,18 +19,13 @@ lines.each do |line|
 end
 
 puzzles = puzzle_list.shuffle
-difficulties = ['easy', 'middling', 'tough']
-ratings = ["1","2","3","4","5"]
-
 seed_puzzles = {}
 
 100.times do |num|
-
+  solution = Solver.new(puzzles[num]).solution
   seed_puzzles[num] = {
-    "difficulty" => difficulties.sample,
-    "rating"     => ratings.sample,
     "board"      => puzzles[num],
-    "solution"   => Solver.new(puzzles[num]).solution
+    "solution"   => solution
   }
 
 end

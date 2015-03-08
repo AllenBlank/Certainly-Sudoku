@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308012002) do
+ActiveRecord::Schema.define(version: 20150308183841) do
 
   create_table "games", force: true do |t|
     t.datetime "started_at"
@@ -30,10 +30,25 @@ ActiveRecord::Schema.define(version: 20150308012002) do
   add_index "games", ["puzzle_id"], name: "index_games_on_puzzle_id"
   add_index "games", ["user_id"], name: "index_games_on_user_id"
 
+  create_table "master_puzzle_stats", force: true do |t|
+    t.integer  "median_solve_time"
+    t.integer  "solve_time_stdev"
+    t.float    "median_solve_rate"
+    t.float    "solve_rate_stdev"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "puzzle_stats", force: true do |t|
+    t.integer  "median_solve_time"
+    t.float    "solve_rate"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "puzzle_id"
+  end
+
   create_table "puzzles", force: true do |t|
     t.string   "board"
-    t.string   "difficulty"
-    t.integer  "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "solution"

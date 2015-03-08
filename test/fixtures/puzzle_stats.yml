@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  median_solve_time: 1
+  solve_rate: 1.5
+
+two:
+  median_solve_time: 1
+  solve_rate: 1.5

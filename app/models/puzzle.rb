@@ -1,9 +1,9 @@
 class Puzzle < ActiveRecord::Base
   has_many :games, dependent: :destroy
   has_many :users, through: :games
-  before_save :set_defaults
+  has_one :puzzle_stats, dependent: :destroy
   
-  
+  after_initialize :create_puzzle_stats
   # the regex does the length requirement too.
   # exactly 81 numbers in a row from start to end of string.
   VALID_BOARD_REGEX = /\A[0-9]{81}\z/
@@ -11,23 +11,23 @@ class Puzzle < ActiveRecord::Base
     presence: true, 
     format: {with: VALID_BOARD_REGEX },
     uniqueness: true
+  
+  validates :solution, 
+    presence: true, 
+    format: {with: VALID_BOARD_REGEX }
     
-  # only allows the strings "easy", "middling", and "tough"  
-  VALID_DIFFICULTY_REGEX = /\Aeasy\z|\Amiddling\z|\Atough\z/
-  validates :difficulty,
-    presence: true,
-    format: {with: VALID_DIFFICULTY_REGEX}
+  def rating
+    self.puzzle_stats.rating
+  end
   
-  # only allows a single digit integer 1 through 5
-  VALID_RATING_REGEX = /\A[1-5]\z/
-  validates :rating,
-    presence: true,
-    format: {with: VALID_RATING_REGEX}
-  
+  def difficulty
+    self.puzzle_stats.difficulty
+  end
+    
   private
   
-    def set_defaults
-      self.rating ||= 3 
-      self.difficulty ||= 'middling'
+    def create_puzzle_stats
+      self.puzzle_stats ||= PuzzleStats.create 
     end
+  
 end

@@ -6,8 +6,8 @@
         <li>
           <h3><%= link_to "Puzzle ##{puzzle.id}", puzzle %></h3>
           <p>Board: <%= truncate puzzle.board, length: 15 %></p>
-          <p>Rating: <%= puzzle.rating %></p>
-          <p>Difficulty: <%= puzzle.difficulty %></p>
+          <p>Rating: <%= puzzle.rating.capitalize %></p>
+          <p>Difficulty: <%= puzzle.difficulty.capitalize %></p>
           <h4><%= link_to "Delete", puzzle, method: "delete" %></h4>
         </li>
       <% end %>

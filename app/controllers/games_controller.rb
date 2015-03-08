@@ -16,7 +16,7 @@ class GamesController < ApplicationController
     
     selected_difficulty = params[:difficulty]
     selected_difficulty ||= "middling"
-    puzzle_possibilities = Puzzle.where(difficulty: selected_difficulty)
+    puzzle_possibilities = Puzzle.all.select {|each_puzzle| each_puzzle.difficulty == selected_difficulty}
     user = current_user
 
     if user
@@ -24,10 +24,11 @@ class GamesController < ApplicationController
       puzzle = puzzle_possibilities.sample
     end
 
-    puzzle ||= Puzzle.where(difficulty: selected_difficulty).sample
+    puzzle ||= Puzzle.all.select {|each_puzzle| each_puzzle.difficulty == "middling"}.sample
     
     @game = Game.new(puzzle: puzzle, user: user)
     @game.save
+    puzzle.puzzle_stats.update_stats
     
     session[:current_game_id] = @game.id
     
@@ -60,8 +61,11 @@ class GamesController < ApplicationController
       @game.update( board_state: board_state)
     end
     
-    if is_solved?
-      @game.update completed_at: Time.now if @game.completed_at.nil?
+    if is_solved? 
+      if @game.completed_at.nil?
+        @game.update completed_at: Time.now
+        @game.puzzle.puzzle_stats.update_stats
+      end
       @solved = true
       @completion_time = @game.time_spent
     end
@@ -89,5 +93,10 @@ class GamesController < ApplicationController
         bounce_chumps "You're the wrong user or not logged in."
       end
     end
+    
+  def is_solved?
+    solution = params[:solution] ? params[:solution] : ""
+    solution == @game.puzzle.solution
+  end
   
 end

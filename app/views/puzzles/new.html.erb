@@ -6,17 +6,12 @@
       
       <%= render 'shared/error_messages' %>
 
-      <%= f.label :board, "Board (an 81 character numeric string with zeroes for blanks)" %>
+      <%= f.label :board, "Board" %>
       <%= f.text_field :board, class: 'form-control' %>
-      
-      <% difficulties = ["easy","middling","tough"] %>
-      <%= f.label :difficulty, "Difficulty" %>
-      <%= f.select :difficulty, difficulties.map { |value| [ value, value ] }, {}, class: 'form-control' %>
-      
-      <% ratings = ["1", "2", "3", "4", "5"] %>
-      <%= f.label :rating, "Rating" %>
-      <%= f.select :rating, ratings.map { |value| [ value, value ] }, {}, class: 'form-control' %> 
 
+      <%= f.label :solution, "Solution" %>
+      <%= f.text_field :solution, class: 'form-control' %>
+      
       <center>
         <%= f.submit "Create a new puzzle", class: "btn btn-primary" %>
       </center>
