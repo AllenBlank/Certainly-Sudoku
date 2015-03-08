@@ -2,7 +2,7 @@ class Game < ActiveRecord::Base
   belongs_to :user
   belongs_to :puzzle
   
-  before_save :ensure_valid_board_state, :update_last_played
+  before_save :ensure_valid_board_state, :update_last_played, :update_time_spent
   serialize :board_state
   
   def set_default_board_state
@@ -63,6 +63,15 @@ class Game < ActiveRecord::Base
     
     def update_last_played
       self.last_played_at = Time.now
+    end
+    
+    def update_time_spent
+      unless self.completed_at
+        self.time_spent ||= 0.seconds
+        
+        time_since = Time.now - self.last_played_at
+        self.time_spent += time_since if time_since < 3000
+      end
     end
   
 end

@@ -47,7 +47,7 @@ class GamesController < ApplicationController
     unless logged_in? && current_game.has_user?
       @game.update user: current_user
     end
-    
+    @game.update last_played_at: Time.now
     @board_state = @game.board_state  #find this string extension in core_class_extensions.rb in initializers.
   end
   
@@ -56,14 +56,14 @@ class GamesController < ApplicationController
     
     board_state = params[:boardState]
     
+    if (current_user == correct_user) 
+      @game.update( board_state: board_state)
+    end
+    
     if is_solved?
       @game.update completed_at: Time.now if @game.completed_at.nil?
       @solved = true
-      @completion_time = (@game.completed_at - @game.created_at)
-    end
-    
-    if (current_user == correct_user) 
-      @game.update( board_state: board_state)
+      @completion_time = @game.time_spent
     end
     
   end

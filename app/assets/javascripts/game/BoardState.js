@@ -82,7 +82,7 @@ var BoardState = {
     var newState = JSON.stringify( this.generate() );
     
     // if either the boardstate or the savetype is different from the last, send the update request
-    if( (newState !== oldState) || (saveType !== oldSaveType) ){
+    if( (newState !== oldState) || (saveType === 'manual' ) ){
       $.ajax({
           type: 'PATCH',
           data: newState,
