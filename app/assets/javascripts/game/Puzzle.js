@@ -34,6 +34,15 @@ var Puzzle = {
       }
     }
   },
+  removePencilConflicts: function(squareNumber, markedNumber) {
+    var neighbors = this.board[squareNumber].neighbors;
+    for(var i = 0;i < neighbors.length; i++) {
+      var j = neighbors[i];
+      var neighbor = this.board[j].obj;
+      neighbor.find('.pencil-' + markedNumber).text('');
+    }
+    
+  },
   fill: function(str) {
     var arr = str.split('');
     for(var i = 0; i < 81;i++){
@@ -54,5 +63,7 @@ $(document).on('ready', function(){
   Puzzle.setup();
   $('.square').on("markedWithPen", function(){
     Puzzle.highlightCollision($(this).squareNumber(), +NumberPallet.active);
+    Puzzle.removePencilConflicts($(this).squareNumber(), +NumberPallet.active);
   });
+  
 });

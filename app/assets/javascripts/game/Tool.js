@@ -112,6 +112,7 @@ var Tool = {
     },
     erase: function() {
       $(this).clearHighlighter();
+      $(this).removeClass('bold');
       if ($(this).isInPen() ) {
         $(this).find('.square-text').text("");
       }
