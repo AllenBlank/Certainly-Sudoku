@@ -42,14 +42,19 @@ var Tool = {
       }
     },
     doubleClick: function() {
-      $('.square').each( Tool.squareHelpers.clearHighlighter );
+      //$('.square').each( Tool.squareHelpers.clearHighlighter );
+      for(var i = 0; i < 81; i++){
+        $('#square-' + i).clearHighlighter();
+      }
     }
   },
   redHighlighter: {
-    down : function($square){
-      if($square.hasClass('redHighlighter')){
-        $square.removeClass('redHighlighter');
-      } else {
+    down : function($square) {
+      if($square.isHighlighted('red')){
+        setTimeout(function(){
+          if(!Mouse.isDown) { $square.clearHighlighter('red'); }
+        },200);
+      }else{
         $square.markWithHighlighter("red");
       }
     },
@@ -60,10 +65,12 @@ var Tool = {
     },
   },
   blueHighlighter: {
-    down : function($square){
-      if($square.hasClass('blueHighlighter')){
-        $square.removeClass('blueHighlighter');
-      } else {
+    down : function($square) {
+      if($square.isHighlighted('blue')){
+        setTimeout(function(){
+          if(!Mouse.isDown) { $square.clearHighlighter('blue'); }
+        },200);
+      }else{
         $square.markWithHighlighter("blue");
       }
     },
@@ -88,8 +95,12 @@ var Tool = {
     isInPen: function() {
       return $(this).hasClass("pen");
     },
-    isHighlighted: function() {
-      return $(this).hasClass("blueHighlighter") || $(this).hasClass("redHighlighter");
+    isHighlighted: function(color) {
+      if(typeof color === 'undefined'){
+        return $(this).hasClass("blueHighlighter") || $(this).hasClass("redHighlighter");
+      } else {
+        return $(this).hasClass(color + "Highlighter");
+      }
     },
     markWithPen: function(number) {
       $(this).setToolmark("pen");
@@ -107,8 +118,13 @@ var Tool = {
     markWithHighlighter: function(color){
       $(this).addToolmark(color + "Highlighter");
     },
-    clearHighlighter: function(){
-      $(this).removeClass("redHighlighter blueHighlighter");
+    clearHighlighter: function(color){
+      if(typeof color === 'undefined'){
+        $(this).removeClass("redHighlighter blueHighlighter");
+      } else {
+        $(this).removeClass(color + "Highlighter");
+      }
+        
     },
     erase: function() {
       $(this).clearHighlighter();
@@ -159,7 +175,7 @@ $(document).on('ready', function(){
   $.fn.extend(Tool.squareHelpers);
   $.fn.extend(Tool.controlHelpers);
   
-  $('.square').on("touchstart mousedown", function(e) { 
+  $('.square').on("clickOrTouch", function(e) {
     e.preventDefault();
     Tool[ Tool.active ].down( $(this) ); 
   });
@@ -170,7 +186,7 @@ $(document).on('ready', function(){
   
   $('.tool').on("touchstart mousedown", function(e) {
     e.preventDefault();
-    e.stopPropagation();
+    //e.stopPropagation();
     $(this).setActiveTool();
   });
   

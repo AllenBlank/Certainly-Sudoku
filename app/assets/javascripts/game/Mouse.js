@@ -6,6 +6,10 @@ var Mouse = {
   
   onMouseDown: function(e){ 
     Mouse.isDown = true;
+    Mouse.clickedRecently = true;
+    setTimeout(function(){
+      Mouse.clickedRecently = false;
+    },300);
   },
   onMouseUp:   function(e){ 
     Mouse.isDown = false;
@@ -23,10 +27,17 @@ var Mouse = {
     if( Mouse.clickedRecently ) {
       $(this).trigger('dblclick');
     }
-    Mouse.clickedRecently = true;
-    window.setTimeout(function(){
-      Mouse.clickedRecently = false;
-    },300);
+    return true;
+  },
+  clickOrTouch: function() {
+    if( !Mouse.clickedRecently ) {
+      $(this).trigger('clickOrTouch');
+    }
+  },
+  discreteClick: function() {
+    if( Mouse.clickedRecently ) {
+      $(this).trigger('discreteClick');
+    }
   }
   
 };
@@ -41,7 +52,10 @@ $(document).on('ready', function(){
   $(document).on("touchstart mousedown", Mouse.onMouseDown);
   $(document).on("touchend mouseup",   Mouse.onMouseUp);
   
-  $('.tool').on("touchstart", Mouse.emulateDoubleClick );
+  $('.square').on('touchstart mousedown', Mouse.clickOrTouch);
+  $('.square').on('mouseup', Mouse.discreteClick);
+  
+  $('.tool').on("touchstart mousedown", Mouse.emulateDoubleClick );
   // 'on' doesn't seem to work quite right, the false there at the end changes
   // the way the event propagates.
   $('.inner').get(0).addEventListener('touchmove', Mouse.emulateMouseEnter, false);
