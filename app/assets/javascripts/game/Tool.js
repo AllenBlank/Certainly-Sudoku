@@ -5,7 +5,7 @@ var Tool = {
       var num = NumberPallet.active;
       if ( !$square.isPermanent() && num) {
         if($square.isInPen() && $square.hasNumber(num) ) {
-          $square.markWithPen( "" );
+          $square.erase();
         }else{
           $square.markWithPen( NumberPallet.active );
           $square.trigger("markedWithPen");

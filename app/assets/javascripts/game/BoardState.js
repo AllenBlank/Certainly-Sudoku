@@ -100,6 +100,9 @@ var BoardState = {
           sucess:   function() {console.log('success');},
           complete: function(o) {BoardState.completeSave(o.responseJSON); },
       });
+      // if you manually save, trigger on saved actions (highlight all collisions).
+      if(saveType === "manual") { $(document).trigger('PuzzleSaved'); }
+      
       return "Saving your progress...";
     }
   },

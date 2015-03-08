@@ -51,7 +51,17 @@ var Puzzle = {
         square.markWithPen(arr[i]);
       }
     }
+  },
+  highlightAllCollisions: function() {
+    for(var i = 0; i < 81; i++){
+      var square = $('#square-' + i);
+      var setNum = square.find('.square-text').text();
+      if(setNum !== ''){
+        Puzzle.highlightCollision(i,+setNum);
+      }
+    }
   }
+  
 };
 
 $(document).on('ready', function(){
@@ -65,5 +75,7 @@ $(document).on('ready', function(){
     Puzzle.highlightCollision($(this).squareNumber(), +NumberPallet.active);
     Puzzle.removePencilConflicts($(this).squareNumber(), +NumberPallet.active);
   });
+  
+  $(document).on('puzzleSaved', Puzzle.highlightAllCollisions);
   
 });
