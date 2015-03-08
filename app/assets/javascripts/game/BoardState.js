@@ -134,6 +134,7 @@ $(document).on('ready', function(){
   
   // save every 2 minutes, we use the clearInterval and the variable here to prevent it from
   // being fired off multiple times...
+  BoardState.generate();
   clearInterval(saveInterval);
   var saveInterval = setInterval(function() { BoardState.save("auto"); }, 120000);
   

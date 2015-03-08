@@ -72,8 +72,8 @@ $(document).on('ready', function(){
   
   Puzzle.setup();
   $('.square').on("markedWithPen", function(){
-    Puzzle.highlightCollision($(this).squareNumber(), +NumberPallet.active);
     Puzzle.removePencilConflicts($(this).squareNumber(), +NumberPallet.active);
+    Puzzle.highlightCollision($(this).squareNumber(), +NumberPallet.active);
   });
   
   $(document).on('puzzleSaved', Puzzle.highlightAllCollisions);
