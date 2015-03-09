@@ -72,7 +72,7 @@ var BoardState = {
     if (BoardState.saving) {return;}
     // set the default savetype to auto.
     saveType = typeof saveType !== 'undefined' ? saveType : "auto";
-    
+
     // save the old savetype for comparison
     var oldSaveType = this.lastSaveType;
     this.lastSaveType = saveType;
@@ -101,7 +101,7 @@ var BoardState = {
           complete: function(o) {BoardState.completeSave(o.responseJSON); },
       });
       // if you manually save, trigger on saved actions (highlight all collisions).
-      if(saveType === "manual") { $(document).trigger('PuzzleSaved'); }
+      if(saveType === "manual") { $(document).trigger('puzzleSaved'); }
       
       return "Saving your progress...";
     }
