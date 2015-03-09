@@ -52,8 +52,8 @@ $(document).on('ready', function(){
   $(document).on("touchstart mousedown", Mouse.onMouseDown);
   $(document).on("touchend mouseup",   Mouse.onMouseUp);
   
-  $('.square').on('touchstart mousedown', Mouse.clickOrTouch);
-  $('.square').on('mouseup', Mouse.discreteClick);
+  //$('.square').on('touchstart mousedown', Mouse.clickOrTouch);
+  //$('.square').on('mouseup', Mouse.discreteClick);
   
   $('.tool').on("touchstart mousedown", Mouse.emulateDoubleClick );
   // 'on' doesn't seem to work quite right, the false there at the end changes

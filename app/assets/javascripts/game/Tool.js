@@ -175,7 +175,7 @@ $(document).on('ready', function(){
   $.fn.extend(Tool.squareHelpers);
   $.fn.extend(Tool.controlHelpers);
   
-  $('.square').on("clickOrTouch", function(e) {
+  $('.square').on("touchstart mousedown", function(e) {
     e.preventDefault();
     Tool[ Tool.active ].down( $(this) ); 
   });
